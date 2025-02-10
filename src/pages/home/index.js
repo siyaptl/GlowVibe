@@ -123,7 +123,7 @@ export default function Home() {
                 {/* background image */}
                 <Bgimg />
                 <div className='lg:w-[570px] lg:h-[522px] lg:ml-[145px] lg:mt-[171px] lg:text-left'>
-                  <Bgcontent text1="NEW COLLECTION" text2="The beauty collection that makes all the difference!" text3="Aliquam vulputate, nunc vitae suscipit aliquet, libero arcu hendrerit sapien." hc="#E88E9B" />
+                  <Bgcontent text1="NEW COLLECTION" text2="The beauty collection that makes all the difference!" text3="Aliquam vulputate, nunc vitae suscipit aliquet, libero arcu hendrerit sapien." hc="#4682B4" />
                   </div>
                 </div>
           
@@ -136,7 +136,7 @@ export default function Home() {
                 <div className="absolute top-11 md:top-28 left-0 w-full flex flex-col justify-center items-center text-center p-5">
                   <div className="md:w-[470px] md:h-[132px] w-[325px] h-[152px]">
                     <Bgcontent 
-                      text1="NEW COLLECTION" text2="The beauty collection that makes all the difference!" text3="Aliquam vulputate, nunc vitae suscipit aliquet, libero arcu hendrerit sapien." hc="#E88E9B" 
+                      text1="NEW COLLECTION" text2="The beauty collection that makes all the difference!" text3="Aliquam vulputate, nunc vitae suscipit aliquet, libero arcu hendrerit sapien." hc="#4682B4" 
                     />
                   </div>
                 </div>
