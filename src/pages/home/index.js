@@ -7,6 +7,9 @@ import Productcard from '../../components/productcard';
 import Bgimg from '../../components/cmpbgimg';
 import Bgcontent from '../../components/cmpbgcontent';
 import Parawstar from '../../components/cmphomepara';
+import bgimage3 from '../../assets/bg3.avif'
+import bgimage4 from '../../assets/bg4.avif'
+import Whyus from '../../components/cmpwhyus';
 
 export default function Home() {
     const CustomDot = ({ onMove, index, onClick, active }) => (
@@ -54,7 +57,7 @@ export default function Home() {
                 {/* background image */}
                 <Bgimg />
                 <div className='lg:w-[570px] lg:h-[322px] lg:ml-[145px] lg:mt-[165px] lg:text-left'>
-                  <Bgcontent text1="NEW IN TOWN" text2="THE NEW BEAUTY COLLECTION" text3="This new collection brings with it the most exciting lorem ipsum dolor sit amet." hc="#E88E9B" />
+                  <Bgcontent text1="NEW IN TOWN" text2="THE NEW BEAUTY COLLECTION" text3="This new collection brings with it the most exciting lorem ipsum dolor sit amet." hc="#E88E9B" bhc="#7B375D " />
                   </div>
                 </div>
           
@@ -71,6 +74,7 @@ export default function Home() {
                 text2="THE NEW BEAUTY COLLECTION" 
                 text3="This new collection brings with it the most exciting lorem ipsum dolor sit amet." 
                 hc="#E88E9B" 
+                bhc="#7B375D "
               />
             </div>
           </div>
@@ -123,7 +127,7 @@ export default function Home() {
                 {/* background image */}
                 <Bgimg />
                 <div className='lg:w-[570px] lg:h-[522px] lg:ml-[145px] lg:mt-[171px] lg:text-left'>
-                  <Bgcontent text1="NEW COLLECTION" text2="The beauty collection that makes all the difference!" text3="Aliquam vulputate, nunc vitae suscipit aliquet, libero arcu hendrerit sapien." hc="#4682B4" />
+                  <Bgcontent text1="NEW COLLECTION" text2="The beauty collection that makes all the difference!" text3="Aliquam vulputate, nunc vitae suscipit aliquet, libero arcu hendrerit sapien." hc="#4682B4" bhc="#1C3D5A" />
                   </div>
                 </div>
           
@@ -136,7 +140,7 @@ export default function Home() {
                 <div className="absolute top-11 md:top-28 left-0 w-full flex flex-col justify-center items-center text-center p-5">
                   <div className="md:w-[470px] md:h-[132px] w-[325px] h-[152px]">
                     <Bgcontent 
-                      text1="NEW COLLECTION" text2="The beauty collection that makes all the difference!" text3="Aliquam vulputate, nunc vitae suscipit aliquet, libero arcu hendrerit sapien." hc="#4682B4" 
+                      text1="NEW COLLECTION" text2="The beauty collection that makes all the difference!" text3="Aliquam vulputate, nunc vitae suscipit aliquet, libero arcu hendrerit sapien." hc="#4682B4"  bhc="#1C3D5A" 
                     />
                   </div>
                 </div>
@@ -161,14 +165,69 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className='lg:ml-[855px] md:ml-[411px] ml-7 lg:mt-[-791px] md:mt-[-791px] lg:pt-0 md:pt-0 pt-11 bg-white pb-16'>
+              <div className='lg:ml-[855px] md:ml-[411px] ml-7 lg:mt-[-791px] md:mt-[-791px] lg:pt-0 md:pt-0 pt-11 bg-white lg:pb-16 md:pb-16 pb-5'>
               <div className=" grid lg:grid-rows-3 md:grid-rows-2 grid-rows-1 gap-4 ">
                     {[...Array(3)].map((_, i) => (
                     <Parawstar key={i}  />
                   ))}
               </div> 
             </div>
+
+                  {/* large and medium screen */}
+            <div className='w-screen bg-white lg:flex md:flex hidden justify-evenly pt-3 pb-0'>
+                <div className='h-[451px] lg:w-[47%] md:w-[47%] w-[91%] bg-cover bg-ceter-top shadow-inner' style={{ backgroundImage: `url(${bgimage3})`, boxShadow: "inset 0 0 15px rgba(0, 0, 0, 0.3)" }}>
+                <div className='lg:w-[43%] lg:h-[222px] lg:ml-[63px] lg:mt-[63px] lg:text-left
+                                md:w-[75%] md:h-[222px] md:ml-[33px] md:mt-[73px] md:text-left'>
+                      <Bgcontent 
+                            text1="NEW COLLECTIONS" 
+                            text2="Awesome Makeup Kit Gift Sets" 
+                            text3="Find your unique style." 
+                            hc="#E88E9B" 
+                            bhc="#7B375D "/>
+                </div>
+                </div>
+                <div className='h-[451px] w-[47%] bg-cover bg-ceter-top shadow-inner' style={{ backgroundImage: `url(${bgimage4})`, boxShadow: "inset 0 0 15px rgba(0, 0, 0, 0.3)" }}>
+                      <div className='lg:w-[43%] lg:h-[222px] lg:ml-[63px] lg:mt-[63px] lg:text-left
+                                md:w-[75%] md:h-[222px] md:ml-[33px] md:mt-[73px] md:text-left'>
+                            <Bgcontent 
+                                  text1="NEW COLLECTIONS" 
+                                  text2="The Ultimate Skincare Regime" 
+                                  text3="Find your unique style." 
+                                  hc="#FDF5E6" 
+                                  bhc="#5C4033"/>
+                      </div>
+                </div>
             </div>
+
+                  {/* small screen */}
+            <div className='w-screen bg-white pt-0 pb-11 lg:hidden md:hidden block'>
+                <div className='h-[331px] w-[91%] bg-cover bg-left shadow-inner mx-auto' style={{ backgroundImage: `url(${bgimage3})`, boxShadow: "inset 0 0 15px rgba(0, 0, 0, 0.3)" }}>
+                <div className='w-[83%] h-[193px] mt-[23px] pt-11 text-center mx-auto'>
+                      <Bgcontent 
+                            text1="NEW COLLECTIONS" 
+                            text2="Awesome Makeup Kit Gift Sets" 
+                            text3="Find your unique style." 
+                            hc="#E88E9B" 
+                            bhc="#7B375D "/>
+                </div>
+                </div>
+                <div className='h-[331px] w-[91%] bg-cover bg-left shadow-inner mx-auto' style={{ backgroundImage: `url(${bgimage4})`, boxShadow: "inset 0 0 15px rgba(0, 0, 0, 0.3)" }}>
+                      <div className='w-[83%] h-[193px] mt-[23px] pt-11 text-center mx-auto'>
+                            <Bgcontent 
+                                  text1="NEW COLLECTIONS" 
+                                  text2="The Ultimate Skincare Regime" 
+                                  text3="Find your unique style." 
+                                  hc="#FDF5E6" 
+                                  bhc="#5C4033"/>
+                      </div>
+                </div>
+            </div>
+
+            <Whyus />
+
+
+            </div>
+
       </>
     );
 }

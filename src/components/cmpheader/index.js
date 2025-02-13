@@ -22,12 +22,12 @@ function Header() {
           <strong>GLOW VIBE</strong>
         </Typography>
         <div className='w-575.16 h-81 justify-center mx-auto text-[15px] lg:flex hidden'>
-          <Button component={Link} to='/' className='h-[80px] font-normal hover:bg-slate-50 hover:text-gray-500' style={{padding:"15px"}} color='#000000'>SHOP ALL</Button>
-          <Button component={Link} to='/' className='h-[80px] font-normal hover:bg-slate-50 hover:text-gray-500' style={{padding:"15px"}} color='#000000'>MAKEUP</Button>
-          <Button component={Link} to='/' className='h-[80px] font-normal hover:bg-slate-50 hover:text-gray-500' style={{padding:"15px"}} color='#000000'>SKIN CARE</Button>
-          <Button component={Link} to='/' className='h-[80px] font-normal hover:bg-slate-50 hover:text-gray-500' style={{padding:"15px"}} color='#000000'>HAIR CARE</Button>
-          <Button component={Link} to='/' className='h-[80px] font-normal hover:bg-slate-50 hover:text-gray-500' style={{padding:"15px"}} color='#000000'>ABOUT</Button>
-          <Button component={Link} to='/' className='h-[80px] font-normal hover:bg-slate-50 hover:text-gray-500' style={{padding:"15px"}} color='#000000'>CONTACT</Button>
+          <Button component={Link} to='/' className='h-[80px] font-normal hover:bg-slate-50 hover:text-fuchsia-400' style={{padding:"15px"}} color='#000000'>SHOP ALL</Button>
+          <Button component={Link} to='/' className='h-[80px] font-normal hover:bg-slate-50 hover:text-fuchsia-400' style={{padding:"15px"}} color='#000000'>MAKEUP</Button>
+          <Button component={Link} to='/' className='h-[80px] font-normal hover:bg-slate-50 hover:text-fuchsia-400' style={{padding:"15px"}} color='#000000'>SKIN CARE</Button>
+          <Button component={Link} to='/' className='h-[80px] font-normal hover:bg-slate-50 hover:text-fuchsia-400' style={{padding:"15px"}} color='#000000'>HAIR CARE</Button>
+          <Button component={Link} to='/' className='h-[80px] font-normal hover:bg-slate-50 hover:text-fuchsia-400' style={{padding:"15px"}} color='#000000'>ABOUT</Button>
+          <Button component={Link} to='/' className='h-[80px] font-normal hover:bg-slate-50 hover:text-fuchsia-400' style={{padding:"15px"}} color='#000000'>CONTACT</Button>
         </div>
        {/* Cart Price (Hidden on Small Screens) */}
        <div className='flex justify-end items-center'>
