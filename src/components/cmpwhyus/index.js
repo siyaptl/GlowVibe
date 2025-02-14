@@ -1,6 +1,5 @@
 import React from 'react'
 import { Truck, ShoppingCart, RotateCcw } from "lucide-react";
-import Footer from '../cmpfooter';
 
 function Whyus() {
     const features = [
@@ -60,7 +59,6 @@ function Whyus() {
                             ))}
                     </span>
             </div>
-            <Footer />
     </>
   )
 }

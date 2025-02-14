@@ -18,7 +18,7 @@ function Footer() {
                 </button>
                 </div>
             </div>
-            <hr className='border-t-1 border-gray-500 w-full mt-5'/>
+            <hr className='border-t-1 border-gray-500 w-full md:mt-5 mt-5 lg:mt-7'/>
 
             {/* Footer Content */}
             <div className="container mx-auto px-5 py-1 mt-10 lg:mb-10 md:mb-12">

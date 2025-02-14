@@ -10,8 +10,9 @@ import Parawstar from '../../components/cmphomepara';
 import bgimage3 from '../../assets/bg3.avif'
 import bgimage4 from '../../assets/bg4.avif'
 import Whyus from '../../components/cmpwhyus';
+import Footer from '../../components/cmpfooter';
 
-export default function Home() {
+const Home = () => {
     const CustomDot = ({ onMove, index, onClick, active }) => (
       <li
         onClick={() => onClick()}
@@ -224,10 +225,12 @@ export default function Home() {
             </div>
 
             <Whyus />
-
+            
+            <Footer />
 
             </div>
 
       </>
     );
-}
+};
+export default  Home;
