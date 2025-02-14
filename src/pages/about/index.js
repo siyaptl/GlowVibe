@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from '../../components/cmpheader';
 import aboutimg from '../../assets/aboutimg.jpg';
-import aboutimg2 from '../../assets/i15.jpg'
+import aboutimg2 from '../../assets/aboutimg2.jpg'
 
 function About() {
   return (
@@ -54,9 +54,9 @@ function About() {
     </div>
 
     {/* 2nd bg content */}
-    <div className='w-screen bg-white flex justify-center items-center pb-7 lg:h-[671px] md:h-[541px] h-[531px]'>
+    <div className='w-screen bg-white flex justify-center items-center pb-7 lg:h-[671px] md:h-[541px] h-[525px]'>
                 <div className='lg:h-[100%] md:h-[100%] h-[100%] w-[90%] bg-cover bg-center' style={{ backgroundImage: `url(${aboutimg2})` }}>
-                <div className='lg:pt-[7%] md:pt-24 pt-[15%] flex items-center lg:mt-24 flex-col'>
+                <div className='lg:pt-16 md:pt-24 pt-[25%] flex items-center lg:mt-24 flex-col'>
                       <div className='text-[#FFFFFF] drop-shadow-md lg:text-[45px] md:text-[41px] text-[29px] leading-[45px] font-serif ... font-normal'>About Our Products</div>
                       <hr className="w-14 border-t-1 border-white md:mx-auto mx-auto lg:my-5 md:my-5 my-3" />
                       <div className='text-[#FFFFFF] lg:w-[69%] md:w-[81%] w-[85%] lg:text-[24px] md:text-[19px] text-[18.5px] font-serif ... lg:leading-[27.25px] md:leading-[27.25px] leading-[24.25px] text-center tracking-wide'>Proin at velit sed elit varius porttitor. Ut a suscipit quam, eu congue odio. Sed eget viverra est. Vivamus ut sodales neque. Sed vel dui et dolor placerat egestas id lacinia mauris</div>
