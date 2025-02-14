@@ -44,14 +44,14 @@ function Whyus() {
                                 key={index} 
                                 className="lg:flex md:flex block items-start lg:space-x-4 md:space-x-3 max-w-xs w-full sm:w-auto mx-auto"
                                 >
-                                <div className="bg-pink-300 lg:w-28 md:mt-3 md:w-28 w-9 md:h-8 lg:h-9 h-9 flex items-center justify-center rounded-full shadow-md mx-auto">
+                                <div className="bg-pink-300 lg:w-24 md:mt-3 md:w-28 w-9 md:h-8 lg:h-9 h-9 flex items-center justify-center rounded-full shadow-md mx-auto">
                                     {feature.icon}
                                 </div>
                                 <div className="text-center md:text-left lg:text-left">
-                                    <h3 className="lg:text-[21px] md:text-[19px] text-[19px] mt-3 text-gray-800 leading-relaxed tracking-wider">
+                                    <h3 className="lg:text-[19px] md:text-[16px] text-[19px] mt-3 text-gray-800 leading-relaxed tracking-wider">
                                     {feature.title}
                                     </h3>
-                                    <p className="text-gray-600 lg:text-[17px] md:text-[15px] mb-5 font-light leading-[25px] mt-1 tracking-wider">
+                                    <p className="text-gray-600 lg:text-[15px] md:text-[15px] mb-5 font-light leading-[25px] mt-1 tracking-wider">
                                     {feature.description}
                                     </p>
                                 </div>

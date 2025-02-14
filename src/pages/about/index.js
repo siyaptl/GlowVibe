@@ -2,6 +2,9 @@ import React from 'react'
 import Header from '../../components/cmpheader';
 import aboutimg from '../../assets/aboutimg.jpg';
 import aboutimg2 from '../../assets/aboutimg2.jpg'
+import me from '../../assets/Me.jpg'
+import Whyus from '../../components/cmpwhyus';
+import Footer from '../../components/cmpfooter';
 
 function About() {
   return (
@@ -64,15 +67,44 @@ function About() {
                 </div>
       </div>
 
-    {/* <div className='w-screen bg-white pt-0 pb-11 lg:hidden md:hidden block'>
-                <div className='h-[271px] w-[91%] bg-cover mx-auto' style={{ backgroundImage: `url(${aboutimg2})`}}>
-                <div className='mt-[23px] pt-24 pl-5 mx-auto'>
-                      <div className='text-[#FFFFFF] drop-shadow-md text-[15px] font-serif ... leading-[15.25px] mb-3'>A few words</div>
-                      <div className='text-[#FFFFFF] drop-shadow-md text-[43px] leading-[31px] font-serif ... font-normal'>About Our Products</div>
-                </div>
-                </div>
-            
-      </div> */}
+       {/* entrepreneur */}
+      <div className="lg:flex lg:flex-row md:flex-row md:flex flex flex-col-reverse items-center lg:h-[711px] lg:bg-[#FFF0F5] md:bg-[#FFF0F5] h-[8901x] brightness-95 w-[90%] mx-auto">
+      {/* Left Image Section */}
+      <div className="md:w-1/2 w-[100%] lg:h-[100%] flex justify-left">
+        <img
+          src={me} // Replace with actual image path
+          alt="Siya"
+          className="lg:w-[95%] md:h-[631px] lg:h-[100%] h-[400px] w-[100%] object-cover lg:object-left-top md:object-left-top lg:pt-0 md:pt-0 pt-5"
+        />
+      </div>
+      
+      {/* Right Text Section */}
+      <div className="md:w-1/2 w-full bg-[#FFF0F5] lg:bg-none md:bg-none text-center md:text-right lg:text-right lg:pr-20 md:pr-5 lg:pt-[7%] md:pt-[9%] pt-11 md:text-[13px] pb-5">
+      <p style={{ 
+                            color: '#4B5563',  // Equivalent to Tailwind's text-gray-600
+                            paddingTop: '11px', 
+                            fontFamily: '"EB Garamond", "Playfair Display", serif',  // Elegant Roman-style fonts
+                            letterSpacing: '0.001em',  // Slight spacing for elegance
+                            fontWeight: '100'  // Thin font
+                        }}>
+                            ABOUT ME
+                        </p>
+        <h1 className="lg:text-[41px] md:text-[37px] text-[31px] text-gray-800" style={{fontFamily: '"EB Garamond", "Playfair Display", serif'}}>Hi, I'm Siya!</h1>
+        <p className="lg:text-2xl md:text-xl text-xl text-center px-[11px] text-gray-900 font-['Marcellus',serif] lg:tracking-wider md:tracking-wider tracking-wide lg:text-right md:text-right leading-7 lg:pl-32 md:pl-[21px] lg:px-0 md:px-0">
+          I'm a 21-year-old woman entrepreneur, living in Gujarat, India
+        </p>
+        <hr className="w-[61px] border-gray-400 my-5 lg:ml-[513px] md:ml-[281px] mx-auto" />
+        <p className="text-gray-600 leading-relaxed tracking-widest lg:text-base md:text-[15px] text-[14px] px-5 lg:ml-[-73px] md:ml-[27px] lg:pl-52">
+          Sed ut fringilla dolor. Morbi suscipit a nunc eu finibus. Nam rutrum mattis velit eget volutpat. Fusce egestas mi urna, id pulvinar ipsum dictum eget. Mauris in dolor velit. Vestibulum finibus felis non massa commodo molestie at id justo. Quisque sollicitudin elit sit amet facilisis euismod. Fusce at arcu sed.
+        </p>
+        <p className="text-gray-600 leading-relaxed tracking-widest lg:text-base md:text-[15px] text-[14px] px-5 lg:ml-[-73px] md:ml-[15px] mt-5 lg:pl-52">
+          Nam rutrum mattis velit eget volutpat. Fusce egestas mi urna, id pulvinar ipsum dictum eget.
+        </p>
+      </div>
+    </div>
+
+    <Whyus />
+    <Footer />
     </>
   )
 }
