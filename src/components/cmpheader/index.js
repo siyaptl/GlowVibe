@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Typography from '@mui/material/Typography';
 import { Toolbar, Button, Drawer, List, ListItemButton, ListItemText, IconButton, Divider } from '@mui/material';
 import MenuIcon from "@mui/icons-material/Menu";
-import CloseIcon from "@mui/icons-material/Close";
 import { Link, useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 
@@ -53,7 +52,7 @@ function Header() {
           <span className="hidden lg:block text-black font-bold mr-1">$0.00</span>
 
           <IconButton className="lg:hidden" onClick={toggleDrawer(true)} sx={{ display: isMobile ? 'flex' : 'none' }}>
-            <MenuIcon className="text-[#e6b4be]" />
+            <MenuIcon className="text-[#C8A2C8]" />
           </IconButton>
         </div>
       </Toolbar>
@@ -67,7 +66,7 @@ function Header() {
           "& .MuiDrawer-paper": {
             width: "100vw",
             height: "auto",
-            marginTop: "64px",
+            marginTop: "61px",
           },
         }}
       >
@@ -76,7 +75,6 @@ function Header() {
           onClick={toggleDrawer(false)}
           sx={{ position: "absolute", top: 10, right: 10 }}
         >
-          <CloseIcon />
         </IconButton>
 
         {/* Menu Items */}
@@ -91,13 +89,13 @@ function Header() {
                   toggleDrawer(false)();
                 }}
                 sx={{
-                  backgroundColor: selectedItem === item.path ? "#ffe4e6" : "transparent",
-                  "&:hover": { backgroundColor: "#fecdd3" },
+                  backgroundColor: selectedItem === item.path ? "#E6D0E6" : "transparent",
+                  "&:hover": { backgroundColor: "#FFF0F5" },
                 }}
               >
                 <ListItemText primary={item.text} primaryTypographyProps={{ fontSize: "14px", color: "black" }} />
               </ListItemButton>
-              {index !== menuItems.length - 1 && <Divider sx={{ height: "1px" }} />}
+              {index !== menuItems.length - 1 && <Divider  />}
             </React.Fragment>
           ))}
         </List>
