@@ -10,7 +10,7 @@ function About() {
   return (
     <>
       < Header />
-
+      {/* large and medium screen */}
       <div className='w-screen bg-white lg:flex md:flex hidden justify-evenly pb-0'>
                 <div className='h-[511px] lg:w-[98%] md:w-[96%] w-[99%] bg-cover bg-bottom' style={{ backgroundImage: `url(${aboutimg})` }}>
                 <div className='lg:ml-[93px] lg:mt-[215px]
@@ -21,9 +21,10 @@ function About() {
                 </div>
       </div>
 
+        {/* small screen */}
       <div className='w-screen bg-white pt-0 pb-11 lg:hidden md:hidden block'>
                 <div className='h-[271px] w-[91%] bg-cover bg-left mx-auto' style={{ backgroundImage: `url(${aboutimg})`}}>
-                <div className='mt-[23px] pt-24 pl-5 mx-auto'>
+                <div className='mt-[5px] pt-24 pl-5 mx-auto'>
                       <div className='text-[#FFFFFF] drop-shadow-md text-[15px] font-serif ... leading-[15.25px] mb-3'>A few words</div>
                       <div className='text-[#FFFFFF] drop-shadow-md text-[43px] leading-[31px] font-serif ... font-normal'>About us</div>
                 </div>
