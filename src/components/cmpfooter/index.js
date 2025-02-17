@@ -13,7 +13,7 @@ function Footer() {
                     placeholder="Your email address..."
                     className="border border-gray-300 px-4 py-3 lg:w-full md:w-64 w-full md:ml-20 sm:w-96 rounded-sm focus:outline-none focus:ring-2 focus:ring-pink-300"
                 />
-                <button className="bg-black text-white lg:px-5 md:px-4 py-3 w-full rounded-sm hover:bg-pink-300 hover:text-black transition">
+                <button className="bg-black text-white lg:px-5 md:px-4 py-3 w-full rounded-sm hover:bg-[#c27e94] hover:text-black transition">
                     SUBSCRIBE
                 </button>
                 </div>
