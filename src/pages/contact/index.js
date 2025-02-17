@@ -6,6 +6,7 @@ import bgimgicon from '../../assets/bgcontacticon.png'
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import EmailIcon from '@mui/icons-material/Email';
 import CallIcon from '@mui/icons-material/Call';
+import Footer from '../../components/cmpfooter';
 
 function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
@@ -24,7 +25,7 @@ function Contact() {
      <Header />    
 
      <div className='w-screen bg-white lg:flex md:flex hidden justify-evenly pb-0'>
-                <div className='h-[511px] lg:w-[98%] md:w-[96%] w-[99%] bg-cover bg-center relative' style={{ backgroundImage: `url(${aboutimg})` }}>
+                <div className='h-[511px] lg:w-[98%] md:w-[95%] w-[99%] bg-cover bg-center relative' style={{ backgroundImage: `url(${aboutimg})` }}>
                 <div className='lg:h-[311px] lg:w-[35%] md:h-[351px] md:w-[41%] bg-cover bg-center absolute lg:top-24 lg:right-32 md:top-20 md:right-10 lg:block md:block hidden' style={{ backgroundImage: `url(${bgimgicon})` }}>
                 </div>
                 <div className='lg:ml-[93px] lg:mt-[215px]
@@ -47,9 +48,9 @@ function Contact() {
                 </div>
       </div>
 
-      <div className="flex flex-col md:flex-row items-center justify-center lg:mt-5 md:mt-5  lg:pl-20">
+      <div className="flex flex-col md:flex-row items-center justify-center lg:mt-5 md:mt-5 lg:pl-20 lg:mb-5 md:mb-5">
       {/* Contact Info */}
-      <div className=" lg:p-8 md:p-8 px-10 w-full md:w-1/2 pb-7">
+      <div className=" lg:p-8 md:p-10 px-10 w-full md:w-1/2 pb-7">
       <p className='lg:text-[45px] md:text-[37px] text-[31px] font-serif ...leading-[15.25px] lg:mb-1 md:mb-1 md:mt-[-31px] pb-3'>Contact Us</p>
         <p className="text-gray-600 lg:w-[55%] md:w-[371px] w-[325px] tracking-wider leading-6 md:text-[15px] text-[14.5px]">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut id leo
@@ -63,28 +64,28 @@ function Contact() {
       </div>
 
       {/* Contact Form */}
-      <div className="bg-[#fcf0f4] w-[96%] md:w-[48%] lg:w-[732.4px] lg:h-[673.4px] lg:pl-20 lg:pt-28 lg:mr-2 md:p-9 py-7 lg:block md:block flex justify-center">
+      <div className="bg-[#fcf0f4] md:mx-5 md:w-[51%] lg:w-[732.4px] mx-5 lg:h-[673.4px] lg:pl-20 lg:pt-28 lg:mr-2 md:p-90 py-7 mb-5 mt-3 lg:block md:block flex justify-center">
         <form onSubmit={handleSubmit} className="space-y-7">
           <div>
-            <label className="block text-[17px] font-semibold text-gray-600 tracking-wider">Name <span className='text-red-500'> * </span> </label>
-            <div className="flex space-x-3">
-              <input type="text" name="firstName" required className="lg:w-64 lg:h-[51px] md:w-40 md:h-[47px] w-[141px] h-[47px] p-2 border text-gray-700 focus:outline-none" onChange={handleChange} />
-              <input type="text" name="lastName" required className="lg:w-64 lg:h-[51px] md:w-40 md:h-[47px] w-[141px] h-[47px]  p-2 border focus:outline-none" onChange={handleChange} style={{backgroundColor:'white'}} />
+            <label className="block text-[17px] pl-5 font-semibold text-gray-600 tracking-wider">Name <span className='text-red-500'> * </span> </label>
+            <div className="flex space-x-3 pl-5">
+              <input type="text" name="firstName" required className="lg:w-64 lg:h-[51px] md:w-40 md:h-[47px] w-[45%] h-[47px] p-2 border text-gray-700 focus:outline-none" onChange={handleChange} />
+              <input type="text" name="lastName" required className="lg:w-64 lg:h-[51px] md:w-40 md:h-[47px] w-[45%] h-[47px]  p-2 border focus:outline-none" onChange={handleChange} style={{backgroundColor:'white'}} />
             </div>
           </div>
           <div>
-            <label className="block text-[17px] font-semibold  text-gray-600">Email <span className='text-red-500'> * </span></label>
-            <input type="email" name="email" required className="lg:w-[520px] lg:h-[51px] md:w-[331px] md:h-[47px] w-full h-[47px] bg-white p-2 border focus:outline-none" onChange={handleChange} />
+            <label className="block text-[17px] pl-5 font-semibold  text-gray-600">Email <span className='text-red-500'> * </span></label>
+            <input type="email" name="email" required className="lg:w-[520px] lg:h-[51px] md:w-[331px] md:h-[47px] w-[88%] ml-5 h-[47px] bg-white p-2 border focus:outline-none" onChange={handleChange} />
           </div>
           <div>
-            <label className="block text-[17px] font-semibold text-gray-600">Message <span className='text-red-500'> * </span></label>
-            <textarea name="message" required className="lg:w-[520px] md:w-[331px] w-full bg-white p-2 border h-[131px] focus:outline-none" rows="5" onChange={handleChange}></textarea>
+            <label className="block text-[17px] font-semibold text-gray-600 pl-5">Message <span className='text-red-500'> * </span></label>
+            <textarea name="message" required className="lg:w-[520px] md:w-[331px] w-[88%] bg-white p-2 border h-[131px] ml-5 focus:outline-none" rows="5" onChange={handleChange}></textarea>
           </div>
-          <button type="submit" className="bg-black text-white px-6 py-2 rounded-sm hover:bg-[#c27e94]">SEND</button>
+          <button type="submit" className="bg-black pl-5 text-white px-6 py-2 rounded-sm ml-5 hover:bg-[#c27e94]">SEND</button>
         </form>
       </div>
     </div>
-
+      <Footer />
 
     </>
   )
