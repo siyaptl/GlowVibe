@@ -80,18 +80,18 @@ function About() {
       </div>
       
       {/* Right Text Section */}
-      <div className="md:w-1/2 w-full bg-[#FFF0F5] lg:bg-none md:bg-none text-center md:text-right lg:text-right lg:pr-20 md:pr-5 lg:pt-[7%] md:pt-[9%] pt-11 md:text-[13px] pb-5">
+      <div className="md:w-1/2 w-full bg-[#FFF0F5] lg:bg-none md:bg-none text-center md:text-right lg:text-right lg:pr-20 lg:pt-[7%] md:pt-[9%] pt-11 md:text-[13px] pb-5">
       <p style={{ 
                             color: '#4B5563',  // Equivalent to Tailwind's text-gray-600
                             paddingTop: '11px', 
                             fontFamily: '"EB Garamond", "Playfair Display", serif',  // Elegant Roman-style fonts
                             letterSpacing: '0.001em',  // Slight spacing for elegance
                             fontWeight: '100'  // Thin font
-                        }}>
+                        }} className=' md:pr-5'>
                             ABOUT ME
                         </p>
-        <h1 className="lg:text-[41px] md:text-[37px] text-[31px] text-gray-800" style={{fontFamily: '"EB Garamond", "Playfair Display", serif'}}>Hi, I'm Siya!</h1>
-        <p className="lg:text-2xl md:text-xl text-xl text-center px-[11px] text-gray-900 font-['Marcellus',serif] lg:tracking-wider md:tracking-wider tracking-wide lg:text-right md:text-right leading-7 lg:pl-32 md:pl-[21px] lg:px-0 md:px-0">
+        <h1 className="lg:text-[41px] md:text-[37px] text-[31px] text-gray-800  md:pr-5" style={{fontFamily: '"EB Garamond", "Playfair Display", serif'}}>Hi, I'm Siya!</h1>
+        <p className="lg:text-2xl md:text-xl text-xl text-center px-[11px] text-gray-900 font-['Marcellus',serif]  md:pr-5 lg:tracking-wider md:tracking-wider tracking-wide lg:text-right md:text-right leading-7 lg:pl-32 md:pl-[21px] lg:px-0 md:px-0">
           I'm a 21-year-old woman entrepreneur, living in Gujarat, India
         </p>
         <hr className="w-[61px] border-gray-400 my-5 lg:ml-[513px] md:ml-[281px] mx-auto" />
@@ -104,7 +104,9 @@ function About() {
       </div>
     </div>
 
+   <div className='mt-5 md:mt-0 lg:mt-0'>                        
     <Whyus />
+    </div>
     <Footer />
     </>
   )

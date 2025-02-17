@@ -48,7 +48,7 @@ function Contact() {
                 </div>
       </div>
 
-      <div className="flex flex-col md:flex-row items-center justify-center lg:mt-5 md:mt-5 lg:pl-20 lg:mb-5 md:mb-5">
+      <div className="flex flex-col md:flex-row items-center justify-center lg:mt-5 md:mt-5 lg:pl-20 lg:mb-5 md:mb-2">
       {/* Contact Info */}
       <div className=" lg:p-8 md:p-10 px-10 w-full md:w-1/2 pb-7">
       <p className='lg:text-[45px] md:text-[37px] text-[31px] font-serif ...leading-[15.25px] lg:mb-1 md:mb-1 md:mt-[-31px] pb-3'>Contact Us</p>
