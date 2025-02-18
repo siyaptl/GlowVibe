@@ -30,26 +30,25 @@ function Footer() {
                 </div>
 
                 {/* Navigation Links */}
-                <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-rows-1 lg:ml-72 lg:w-[411px] md:ml-28 md:w-[271px]">
-                    <ul className="space-y-1">
-                    <li><a href="#" className="hover:text-gray-500">Shop All</a></li>
-                    <li><a href="#" className="hover:text-gray-500">Makeup</a></li>
-                    <li><a href="#" className="hover:text-gray-500">Skin Care</a></li>
-                    <li><a href="#" className="hover:text-gray-500">Hair Care</a></li>
-                    <li><a href="#" className="hover:text-gray-500">About</a></li>
-                    <li><a href="#" className="hover:text-gray-500">Contact</a></li>
+                <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-rows-1 lg:ml-[213px] lg:w-[411px] md:ml-20 md:w-[281px]">
+                    <ul className="space-y-1 lg:mt-3 md:mt-4">
+                    <li><a href="/shopall" className="hover:text-gray-500">Shop All</a></li>
+                    <li><a href="/makeup" className="hover:text-gray-500">Makeup</a></li>
+                    <li><a href="skincare" className="hover:text-gray-500">Skin Care</a></li>
+                    <li><a href="/about" className="hover:text-gray-500">About</a></li>
+                    <li><a href="/contact" className="hover:text-gray-500">Contact</a></li>
                     </ul>
 
                     <ul className="space-y-1 md:pt-7 pt-7">
-                    <li><a href="#" className="hover:text-gray-500">Refund Policy</a></li>
-                    <li><a href="#" className="hover:text-gray-500">Terms & Conditions</a></li>
-                    <li><a href="#" className="hover:text-gray-500">FAQ</a></li>
-                    <li><a href="#" className="hover:text-gray-500">Privacy Policy</a></li>
+                    <li><a href="/refund" className="hover:text-gray-500">Refund Policy</a></li>
+                    <li><a href="/terms" className="hover:text-gray-500">Terms & Conditions</a></li>
+                    <li><a href="/faq" className="hover:text-gray-500">FAQ</a></li>
+                    <li><a href="/privacy" className="hover:text-gray-500">Privacy Policy</a></li>
                     </ul>
                 </div>
 
                 {/* Social Icons */}
-                <div className="flex justify-center md:justify-start lg:space-x-5 md:space-x-1 space-x-1 pb-5 lg:pl-72 lg:pt-[61px] md:pl-40 md:pt-[71px] pt-5">
+                <div className="flex justify-center md:justify-start lg:space-x-5 md:space-x-1 space-x-1 pb-5 lg:ml-20 lg:pt-[61px] md:pl-40 md:pt-[71px] pt-5">
                     <a href="#" className="text-gray-900 hover:text-pink-300 text-xl">
                     <i className="fab fa-facebook"></i>
                     </a>

@@ -10,6 +10,7 @@ import {
 import Shopall from './pages/shopall';
 import Makeup from './pages/makeup';
 import Skincare from './pages/skincare';
+import Faq from './pages/faq';
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
         <Route path="/skincare" element={<Skincare />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/faq" element={<Faq />} />
       </Routes>
     </Router>
   )
