@@ -1,11 +1,33 @@
 import React from 'react';
 import { Star } from "lucide-react";
+import LocalMallIcon from '@mui/icons-material/LocalMall';
+import { styled } from '@mui/material/styles';
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+
 
 function Productcard() {
+  
+  const BootstrapTooltip = styled(({ className, ...props }) => (
+    <Tooltip {...props} arrow classes={{ popper: className }} />
+  ))(({ theme }) => ({
+    [`& .${tooltipClasses.arrow}`]: {
+      color: theme.palette.common.slate,
+    },
+    [`& .${tooltipClasses.tooltip}`]: {
+      backgroundColor: theme.palette.common.slate,
+    },
+  }));
+
   return (
     <div className="lg:mb-0 mb-2 bg-white ">
       {/* Product Image Placeholder */}
-      <div className="hover:shadow-xl transition-all duration-300 ease-in-out hover:scale-100 min-w-[111px] w-full lg:h-[421px] md:h-[291px] h-[211px] bg-pink-100 rounded-lg"></div>
+      <div className="hover:shadow-xl transition-all duration-300 ease-in-out hover:scale-100 min-w-[111px] w-full lg:h-[421px] md:h-[291px] h-[211px] bg-pink-100 rounded-lg">
+      <span className="absolute top-3 right-3 bg-[#fdfdfb] h-9 w-9 flex items-center justify-center rounded-full shadow-md ">
+      <BootstrapTooltip title={<span style={{ fontSize: '13px', padding:'11px' }}>Add to cart</span>} placement="left">
+          <LocalMallIcon className="text-slate-700 " fontSize="small" />
+          </BootstrapTooltip>
+        </span>
+      </div>
 
       {/* Star Ratings */}
       <span className="flex space-x-1 text-slate-700 mt-2">
