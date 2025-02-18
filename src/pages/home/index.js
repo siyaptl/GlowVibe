@@ -11,6 +11,9 @@ import bgimage3 from '../../assets/bg3.avif'
 import bgimage4 from '../../assets/bg4.avif'
 import Whyus from '../../components/cmpwhyus';
 import Footer from '../../components/cmpfooter';
+import { beautyProductsrow1 } from '../../config/staticdata';
+import { beautyProductsrow2 } from '../../config/staticdata';
+import Description from '../productdescription';
 
 const Home = () => {
     const CustomDot = ({ onMove, index, onClick, active }) => (
@@ -109,18 +112,36 @@ const Home = () => {
                 </div>
 
               <div className="w-screen bg-white grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 p-4">
-                {[...Array(4)].map((_, i) => (
-                <Productcard key={i}  />
-              ))}
+              {beautyProductsrow1.map((product) => (
+                  <Productcard
+                    key={product.id}
+                    name={product.name}
+                    price={product.price}
+                    discountPrice={product.discountPrice}
+                    image={product.image}
+                    rating={product.rating}
+                    category={product.category}
+                    description={product.description}
+                  />
+                ))}
               </div>  
 
               <div className='lg:h-[163.25px] md:h-[93.25px] h-[103px] lg:pt-[73px] pt-[33px] md:pt-[13px] w-screen bg-white text-gray-800 text-center mb-0'>
                 <Maininfo infoupper="SHOP" infolower="Best Selling" />
               </div>
               <div className="w-screen bg-white grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 p-4 lg:pb-16">
-              {[...Array(4)].map((_, i) => (
-              <Productcard key={i}  />
-            ))}
+              {beautyProductsrow2.map((product) => (
+                  <Productcard
+                    key={product.id}
+                    name={product.name}
+                    price={product.price}
+                    discountPrice={product.discountPrice}
+                    image={product.image}
+                    rating={product.rating}
+                    category={product.category}
+                    description={product.description}
+                  />
+                ))}
               </div> 
 
             {/* large screen */}

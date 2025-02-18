@@ -11,6 +11,7 @@ import Shopall from './pages/shopall';
 import Makeup from './pages/makeup';
 import Skincare from './pages/skincare';
 import Faq from './pages/faq';
+import Description from './pages/productdescription'; 
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/faq" element={<Faq />} />
+        <Route path="/productdescription/:id" element={<Description />} />
       </Routes>
     </Router>
   )
