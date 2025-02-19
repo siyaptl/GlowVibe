@@ -20,6 +20,7 @@ function Productcard({id, name, price, discountPrice, image, category, descripti
   return (
     <div className="lg:mb-0 mb-2 bg-white relative group">
       {/* Product Image Placeholder */}
+      <a href="/description">
       <div className="hover:shadow-xl transition-all duration-300 ease-in-out hover:scale-100 min-w-[111px] w-full bg-pink-100 rounded-lg">
       <img src={image} alt={name} />
       <span className="absolute opacity-0 group-hover:opacity-100 top-3 right-3 bg-[#fdfdfb] h-9 w-9 mt-0 flex items-center justify-center rounded-full shadow-md ">
@@ -28,6 +29,7 @@ function Productcard({id, name, price, discountPrice, image, category, descripti
           </BootstrapTooltip>
         </span>
       </div>
+      </a>
 
       {/* Star Ratings */}
       <span className="flex space-x-1 text-slate-700 mt-3">
