@@ -5,6 +5,7 @@ function Skincare() {
   return (
     <div>
       <Header />
+      Skin care
     </div>
   )
 }
