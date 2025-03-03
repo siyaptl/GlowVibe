@@ -2,18 +2,14 @@ import React from 'react'
 import Header from '../../components/cmpheader'
 import { Minus, Plus } from "lucide-react";
 import { useState } from "react";
-import p1 from '../../assets/homeproducts/p1.jpg'
-import p1p3 from '../../assets/homeproducts/p1p3.jpg'
-import p1p4 from '../../assets/homeproducts/p1p4.jpg'
-import p1p2 from '../../assets/homeproducts/p1p2.jpg'
 import belowdescription from '../../assets/homeproducts/belowdescription.jpg'
 import { Star } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Footer from '../../components/cmpfooter';
-
+import { beautyProductsrow } from '../../config/staticdata';
 
 function Description() {
-  const [selectedimg, setSelectedimg] = useState(p1)
+  
   const [quantity, setQuantity] = useState(1);
 
   const [activeTab, setActiveTab] = useState("description");
@@ -23,7 +19,7 @@ function Description() {
     const [email, setEmail] = useState("");
     const [review, setReview] = useState("");
     const [rating, setRating] = useState(0);
-  
+    const { id } = useParams();
     const handleSubmit = (e) => {
       e.preventDefault();
       if (name && email && review && rating) {
@@ -37,8 +33,11 @@ function Description() {
         alert("Please fill in all fields.");
       }
     }
-
+    // Find the product that matches the ID
+  const product = beautyProductsrow.find((item) => item.id.toString() === id);
   
+  const [selectedimg, setSelectedimg] = useState(product.innerimage1)
+        
   return (
     <>
       <Header />
@@ -47,33 +46,39 @@ function Description() {
       <div className="flex justify-center items-center lg:mt-[110px] mt-5 md:mt-[50px]">
             <div className="lg:w-[83%] md:w-[85%] w-[91%] flex md:flex-col lg:flex-row flex-col">
               <div className='flex lg:flex-col flex-col md:flex-col lg:w-1/2'>
-              <div className="lg:w-full md:bg-center p-6 flex justify-center items-center relative h-[412px] lg:h-[712px] md:h-[712px] bg-center bg-cover"  style={{ backgroundImage: `url(${selectedimg})`}}>
-                <span className="absolute top-4 left-4 bg-white px-3 py-1 text-sm text-gray-600 tracking-wider rounded-full shadow">Sale!</span>
+                <div
+                  id={product.id}
+                  className="lg:w-full md:bg-center p-6 flex justify-center items-center relative h-[412px] lg:h-[712px] md:h-[712px] bg-center bg-cover cursor-pointer"
+                  style={{ backgroundImage: `url(${selectedimg})` }}
+                >
+                <span className="absolute top-4 left-4 bg-white px-3 py-1 text-sm text-gray-600 tracking-wider rounded-full shadow">
+                  Sale!
+                </span>
               </div>
               <div className="flex mt-5 justify-between">
-                    {[p1, p1p2, p1p3, p1p4].map((image, index) => (
+                    {[product.innerimage1, product.innerimage2, product.innerimage3, product.innerimage4].map((image, index) => (
                       <div
                         key={index}
                         className="lg:h-[139px] lg:w-[139px] md:h-[159px] md:w-[159px] h-[89px] w-[89px] bg-cover bg-center transition-all duration-300 brightness-75 hover:brightness-100"
                         style={{ backgroundImage: `url(${image})` }} onClick={() => setSelectedimg(image)}
                       ></div>
-                    ))}
+                      ))} 
                   </div>
 
             </div>
 
               <div className="lg:w-1/2 lg:p-3 lg:ml-7 pl-2 md:mt-7 mt-7 lg:mt-0">
-              <p className="text-sm text-gray-500 mb-5 tracking-widest"><span>  <Link to="/">Home</Link></span> / <span ><Link to='/skincare'>Skin Care</Link></span> / Product Name 1</p>
-                <p className="text-base text-gray-700 mb-3 tracking-wider">Hair Care</p>
-                <h1 className="text-3xl font-serif tracking-wider mb-3">Product Name 1</h1>
+              <p className="text-sm text-gray-500 mb-5 tracking-widest"><span>  <Link to="/">Home</Link></span> / <span ><Link to='/skincare'>{product.category}</Link></span> / {product.name}</p>
+                <p className="text-base text-gray-700 mb-3 tracking-wider">{product.category}</p>
+                <h1 className="text-3xl font-serif tracking-wider mb-3">{product.name}</h1>
                 <p className="text-[21px] text-gray-700 mt-2">
-                  <span className="line-through text-gray-400">$75.00</span> <span className="font-bold text-slate-700">$59.00</span><span className='text-[13.5px] tracking-wider'> & Free Shipping </span>
+                  <span className="line-through text-gray-400">{product.price}</span> <span className="font-bold text-slate-700">{product.discountPrice}</span><span className='text-[13.5px] tracking-wider'> & Free Shipping </span>
                 </p>
                 <p className="text-gray-600 mt-2 font-light text-[16px] tracking-wider leading-[25px] mr-16">
-                Ut quis sollicitudin orci. Aliquam at libero non purus sodales sagittis eu ac neque. Nunc ipsum felis, vehicula eu aliquam sed, ultricies ac lacus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam viverra commodo finibus. Morbi laoreet lacus quis lobortis tempor. Nam tincidunt, lectus a suscipit fringilla, mauris turpis dapibus dolor, eu venenatis diam nibh id massa.
+                {product.description1}
                 </p>
 
-                <p className="text-gray-600 mt-4 font-light text-[16px] tracking-wider leading-[25px] mr-16">Nulla eget tortor ultrices, ultricies turpis a, accumsan turpis. Quisque dignissim semper leo ac accumsan. Quisque est nisl, bibendum ut elit quis, pellentesque vehicula tellus. Sed luctus mattis ante ac posuere.</p>
+                <p className="text-gray-600 mt-4 font-light text-[16px] tracking-wider leading-[25px] mr-16">{product.description2}</p>
                 
                 <div className="flex items-center mt-6 space-x-4">
                 <div className="flex items-center border px-3 py-1">
@@ -100,7 +105,7 @@ function Description() {
                 </div>
                 
                 <hr className="w-full border-t-1 border-gray-200 mt-5" />
-                <p className="text-sm text-gray-500 mt-4 tracking-wider">Category:<span className='text-gray-700'> Hair Care</span></p>
+                <p className="text-sm text-gray-500 mt-4 tracking-wider">Category:<span className='text-gray-700'> {product.category}</span></p>
               </div>
             </div>
           </div>
@@ -137,9 +142,7 @@ function Description() {
           <div>
             <h2 className="text-[33px] mb-3 font-serif tracking-wider text-gray-900">More about the product</h2>
             <p className='tracking-widest w-[71%] text-gray-700'>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-              Suspendisse ac massa eget urna tempor vehicula vel id nisi.
-              Pellentesque sed felis auctor, molestie lectus vitae, elementum orci.
+              {product.moredescription}
             </p>
             <div className="lg:w-full md:bg-center p-6 flex justify-center items-center relative h-[412px] lg:h-[652px] md:h-[712px] bg-center bg-cover mt-9 brightness-110"  style={{ backgroundImage: `url(${belowdescription})`}}>
             <div className="absolute inset-0 flex items-center justify-center text-center text-white px-6 bg-black/30">

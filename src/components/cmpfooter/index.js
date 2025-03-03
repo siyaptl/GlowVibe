@@ -49,15 +49,15 @@ function Footer() {
 
                 {/* Social Icons */}
                 <div className="flex justify-center md:justify-start lg:space-x-5 md:space-x-1 space-x-1 pb-5 lg:ml-20 lg:pt-[61px] md:pl-40 md:pt-[71px] pt-5">
-                    <a href="#" className="text-gray-900 hover:text-pink-300 text-xl">
+                <button onClick={() => window.open("https://facebook.com", "_blank")} className="text-gray-900 hover:text-pink-300 text-xl">
                     <i className="fab fa-facebook"></i>
-                    </a>
-                    <a href="#" className="text-gray-900 hover:text-pink-300 text-xl">
+                    </button>
+                    <button onClick={() => window.open("https://twitter.com", "_blank")} className="text-gray-900 hover:text-pink-300 text-xl">
                     <i className="fab fa-twitter"></i>
-                    </a>
-                    <a href="#" className="text-gray-900 hover:text-pink-300 text-xl">
+                    </button>
+                    <button onClick={() => window.open("https://instagram.com", "_blank")} className="text-gray-900 hover:text-pink-300 text-xl">
                     <i className="fab fa-instagram"></i>
-                    </a>
+                    </button>
                 </div>
                 </div>
             </div>

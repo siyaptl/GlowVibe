@@ -11,9 +11,7 @@ import bgimage3 from '../../assets/bg3.avif'
 import bgimage4 from '../../assets/bg4.avif'
 import Whyus from '../../components/cmpwhyus';
 import Footer from '../../components/cmpfooter';
-import { beautyProductsrow1 } from '../../config/staticdata';
-import { beautyProductsrow2 } from '../../config/staticdata';
-import Description from '../productdescription';
+import { beautyProductsrow } from '../../config/staticdata';
 
 const Home = () => {
     const CustomDot = ({ onMove, index, onClick, active }) => (
@@ -112,13 +110,16 @@ const Home = () => {
                 </div>
 
               <div className="w-screen bg-white grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 p-4">
-              {beautyProductsrow1.map((product) => (
+              {beautyProductsrow.map((product) => (
                   <Productcard
-                    key={product.id}
+                    id={product.id}
                     name={product.name}
                     price={product.price}
                     discountPrice={product.discountPrice}
-                    image={product.image}
+                    innerimage1= {product.innerimage1}
+                    innerimage2= {product.innerimage2}
+                    innerimage3= {product.innerimage3}
+                    innerimage4= {product.innerimage4}
                     rating={product.rating}
                     category={product.category}
                     description={product.description}
@@ -130,13 +131,16 @@ const Home = () => {
                 <Maininfo infoupper="SHOP" infolower="Best Selling" />
               </div>
               <div className="w-screen bg-white grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 p-4 lg:pb-16">
-              {beautyProductsrow2.map((product) => (
+              {beautyProductsrow.map((product) => (
                   <Productcard
-                    key={product.id}
+                    id={product.id}
                     name={product.name}
                     price={product.price}
                     discountPrice={product.discountPrice}
-                    image={product.image}
+                    innerimage1= {product.innerimage1}
+                    innerimage2= {product.innerimage2}
+                    innerimage3= {product.innerimage3}
+                    innerimage4= {product.innerimage4}
                     rating={product.rating}
                     category={product.category}
                     description={product.description}
