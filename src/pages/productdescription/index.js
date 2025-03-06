@@ -7,6 +7,8 @@ import { Star } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import Footer from '../../components/cmpfooter';
 import { beautyProductsrow } from '../../config/staticdata';
+import krudes from '../../assets/krupdes.jpg';
+import Bgcontent from '../../components/cmpbgcontent';
 
 function Description() {
   
@@ -288,7 +290,6 @@ function Description() {
           SUBMIT
         </button>
       </form>
-
       
     </div>
 
@@ -296,6 +297,18 @@ function Description() {
       </div>
     </div>
      <div className='lg:p-5 md:p-5'></div>
+
+     <div className='h-[571px] w-[91%] bg-cover bg-left shadow-inner mx-auto mb-11' style={{ backgroundImage: `url(${krudes})`, boxShadow: "inset 0 0 15px rgba(0, 0, 0, 0.3)" }}>
+                      <div className='w-[83%] h-[593px] mt-[23px] pt-[210px] text-center ml-1'>
+                            <Bgcontent 
+                                  text1="KRUPALI" 
+                                  text2="KRUPALI" 
+                                  text3="Find your unique style." 
+                                  hc="#FDF5E6" 
+                                  bhc="#5C4033"/>
+                      </div>
+                </div>
+
     <Footer />
    </>
   )
