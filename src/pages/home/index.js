@@ -111,7 +111,7 @@ const Home = () => {
 
               <div className="w-screen bg-white grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 p-4">
               {beautyProductsrow.map((product) => (
-                  <Productcard
+                  product.id<=4&&(<Productcard
                     id={product.id}
                     name={product.name}
                     price={product.price}
@@ -123,7 +123,7 @@ const Home = () => {
                     rating={product.rating}
                     category={product.category}
                     description={product.description}
-                  />
+                  />)
                 ))}
               </div>  
 
@@ -132,7 +132,7 @@ const Home = () => {
               </div>
               <div className="w-screen bg-white grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 p-4 lg:pb-16">
               {beautyProductsrow.map((product) => (
-                  <Productcard
+                  product.id<=4&&(<Productcard
                     id={product.id}
                     name={product.name}
                     price={product.price}
@@ -144,7 +144,7 @@ const Home = () => {
                     rating={product.rating}
                     category={product.category}
                     description={product.description}
-                  />
+                  />)
                 ))}
               </div> 
 

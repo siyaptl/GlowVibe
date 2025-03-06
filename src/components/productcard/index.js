@@ -4,7 +4,7 @@ import { styled } from '@mui/material/styles';
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 import { useNavigate } from "react-router-dom";
 
-function Productcard({id, name, price, discountPrice, innerimage1, innerimage2, innerimage3, innerimage4, category, description1, description2, moredescription}) {
+function Productcard({ id, name, price, discountPrice, innerimage1 }) {
   
   const BootstrapTooltip = styled(({ className, ...props }) => (
     <Tooltip {...props} arrow classes={{ popper: className }} />
@@ -19,14 +19,19 @@ function Productcard({id, name, price, discountPrice, innerimage1, innerimage2, 
 
   const navigate = useNavigate();
 
+  const handleClick = () => {
+    navigate(`/description/${id}`);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
-    <div className="lg:mb-0 mb-2 bg-white relative group" onClick={() => navigate(`/description/${id}`)}>
+    <div className="lg:mb-0 mb-2 bg-white relative group" onClick={handleClick}>
       {/* Product Image Placeholder */}
       <div className="hover:shadow-xl transition-all duration-300 ease-in-out hover:scale-100 min-w-[111px] w-full bg-pink-100 rounded-lg">
-      <img src={innerimage1} alt={name} />
-      <span className="absolute opacity-0 group-hover:opacity-100 top-3 right-3 bg-[#fdfdfb] h-9 w-9 mt-0 flex items-center justify-center rounded-full shadow-md ">
-      <BootstrapTooltip title={<span style={{ fontSize: '13px', padding:'11px' }}>Add to cart</span>} placement="left">
-          <LocalMallIcon className="text-slate-700 " fontSize="small" />
+        <img src={innerimage1} alt={name} />
+        <span className="absolute opacity-0 group-hover:opacity-100 top-3 right-3 bg-[#fdfdfb] h-9 w-9 mt-0 flex items-center justify-center rounded-full shadow-md ">
+          <BootstrapTooltip title={<span style={{ fontSize: '13px', padding:'11px' }}>Add to cart</span>} placement="left">
+            <LocalMallIcon className="text-slate-700 " fontSize="small" />
           </BootstrapTooltip>
         </span>
       </div>
@@ -40,7 +45,7 @@ function Productcard({id, name, price, discountPrice, innerimage1, innerimage2, 
 
       {/* Product Name */}
       <h2 className="lg:text-[17px] text-[15px] tracking-widest text-gray-800 lg:mt-2 mt-1 font-serif">
-            {name}
+        {name}
       </h2>
 
       {/* Product Price */}
