@@ -7,38 +7,31 @@ import Footer from '../../components/cmpfooter';
 
 function Shopall() {
   const [sortOrder, setSortOrder] = useState("default");
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8;
-  const totalPages = Math.ceil(beautyProductsrow.length / itemsPerPage);
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 4;
+        const totalPages = Math.ceil(beautyProductsrow.length / itemsPerPage);
 
-  // Sorting logic
-  const sortedProducts = [...beautyProductsrow].sort((a, b) => {
-    switch (sortOrder) {
-      case "popularity":
-        return b.popularity - a.popularity;
-      case "rating":
-        return b.rating - a.rating;
-      case "latest":
-        return new Date(b.date) - new Date(a.date);
-      case "price-low":
-        return a.price - b.price;
-      case "price-high":
-        return b.price - a.price;
-      default:
-        return 0;
-    }
-  });
+ // Sorting logic
+ const sortedProducts = [...beautyProductsrow].sort((a, b) => {
+  switch (sortOrder) {
+    case "popularity":
+      return b.rating - a.rating; // Sort by highest rating
+    case "rating":
+      return b.rating - a.rating; // Sort by rating (same as popularity)
+    case "latest":
+      return b.id - a.id; // Assuming higher ID means newer product
+    case "price-low":
+      return a.discountPrice - b.discountPrice; // Sort by price low to high
+    case "price-high":
+      return b.discountPrice - a.discountPrice; // Sort by price high to low
+    default:
+      return 0; // Default order
+  }
+});
 
   // Pagination logic
   const startIndex = (currentPage - 1) * itemsPerPage;
   const paginatedProducts = sortedProducts.slice(startIndex, startIndex + itemsPerPage);
-
-  const handlePageChange = (page) => {
-    if (page >= 1 && page <= totalPages) {
-      setCurrentPage(page);
-      window.scrollTo({ top: 0, behavior: 'smooth' });  // Only scroll once
-    }
-  };  
 
   const endIndex = startIndex + itemsPerPage;
 
@@ -94,7 +87,9 @@ function Shopall() {
         {currentPage > 1 && (
           <button
             className="w-10 h-10 border flex items-center justify-center"
-            onClick={() => {handlePageChange(currentPage - 1)
+            onClick={() => {
+              setCurrentPage(currentPage - 1);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
           >
             ←
@@ -110,7 +105,9 @@ function Shopall() {
               className={`w-10 h-10 border flex items-center justify-center ${
                 currentPage === page ? "bg-black text-white" : ""
               }`}
-              onClick={() => {handlePageChange(page)
+              onClick={() => {
+                setCurrentPage(page);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
             >
               {page}
@@ -122,7 +119,9 @@ function Shopall() {
         {currentPage < totalPages && (
           <button
             className="w-10 h-10 border flex items-center justify-center"
-            onClick={() => {handlePageChange(currentPage + 1)
+            onClick={() => {
+              setCurrentPage(currentPage + 1);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
           >
             →

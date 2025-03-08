@@ -5,7 +5,7 @@ import { beautyProductsrow } from '../../config/staticdata';
 import Productcard from '../../components/productcard';
 import Footer from '../../components/cmpfooter';
 
-function Shopall() {
+function Makeup() {
   const [sortOrder, setSortOrder] = useState("default");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
@@ -131,4 +131,4 @@ function Shopall() {
   );
 }
 
-export default Shopall;
+export default Makeup;

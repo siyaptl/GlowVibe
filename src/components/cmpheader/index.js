@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Typography from '@mui/material/Typography';
 import { Toolbar, Button, Drawer, List, ListItemButton, ListItemText, IconButton, Divider } from '@mui/material';
 import MenuIcon from "@mui/icons-material/Menu";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Link, useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 
@@ -47,9 +48,15 @@ function Header() {
           ))}
         </div>
 
-        {/* Cart Price & Mobile Menu Icon */}
+        {/* Cart Price, Account Icon & Mobile Menu Icon */}
         <div className='flex justify-end items-center'>
-          <span className="hidden lg:block text-black font-bold mr-1">$0.00</span>
+
+          {/* Account Icon */}
+          <IconButton onClick={() => navigate("/login")} className="lg:block hidden">
+            <AccountCircleIcon className="lg:text-[#1f1d1f] md:text-[#C8A2C8] text-[#C8A2C8]" />
+          </IconButton>
+
+          <span className="hidden lg:block text-black font-bold mr-1 ml-1">$0.00</span>
 
           <IconButton className="lg:hidden" onClick={toggleDrawer(true)} sx={{ display: isMobile ? 'flex' : 'none' }}>
             <MenuIcon className="text-[#C8A2C8]" />

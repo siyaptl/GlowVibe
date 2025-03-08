@@ -43,6 +43,10 @@ import mp71 from '../../src/assets/skincare/p11.jpg'
 import mp72 from '../../src/assets/skincare/p12.jpg'
 import mp73 from '../../src/assets/skincare/p13.jpg'
 import mp74 from '../../src/assets/skincare/p14.jpg'
+import mp81 from '../../src/assets/skincare/p21.jpg'
+import mp82 from '../../src/assets/skincare/p22.jpg'
+import mp83 from '../../src/assets/skincare/p23.jpg'
+import mp84 from '../../src/assets/skincare/p24.jpg'
 
 // home page products first row
 export const beautyProductsrow = [
@@ -214,8 +218,22 @@ export const beautyProductsrow = [
   description1: "Brighten and revitalize your skin with our Vitamin C Face Cream. This nourishing formula helps to even out skin tone, reduce dark spots, and restore a natural glow.",
   description2: "Infused with antioxidants and hydrating ingredients, it deeply moisturizes while protecting against environmental damage, leaving your skin soft and radiant.",
   moredescription: "Perfect for daily use, this lightweight, non-greasy cream absorbs quickly into the skin. Suitable for all skin types, it promotes a youthful complexion and enhances skin elasticity over time."
+},
+{
+  id: 12,
+  name: "GlowBoost Hydrating Serum",
+  price: 39.99,
+  discountPrice: 32.99,
+  innerimage1: mp81,
+  innerimage2: mp82,
+  innerimage3: mp83,
+  innerimage4: mp84,
+  rating: 4.8,
+  category: "Skin care",
+  description1: "Experience deep hydration with our GlowBoost Hydrating Serum. This advanced formula replenishes moisture, plumps the skin, and reduces fine lines for a youthful glow.",
+  description2: "Enriched with Vitamin E and botanical extracts, it soothes irritation, enhances skin elasticity, and promotes a smoother, more radiant complexion.",
+  moredescription: "Fast-absorbing and lightweight, this non-greasy serum is suitable for all skin types, including sensitive skin. Ideal for daily use, it keeps your skin soft, supple, and well-nourished."
 }
-
 ];
 
   

@@ -12,6 +12,7 @@ import Makeup from './pages/makeup';
 import Skincare from './pages/skincare';
 import Faq from './pages/faq';
 import Description from './pages/productdescription'; 
+import Login from './pages/login';
 
 export default function App() {
   return (
@@ -26,6 +27,7 @@ export default function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/faq" element={<Faq />} />
         <Route path="/description/:id" element={<Description />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
   )
