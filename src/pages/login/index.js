@@ -2,7 +2,11 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { EmailOutlined, LockOutlined } from "@mui/icons-material";
 import RepeatIcon from '@mui/icons-material/Repeat';
+import {  Card } from "@mui/material";
+import img from '../../assets/loginlogo.jpg'
+import bg from '../../assets/loginbg.jpeg';
 
+// for lg screen
 const Container = styled.div`
   position: absolute;
   width: 100%;
@@ -130,7 +134,7 @@ export default function SignIn() {
     localStorage.setItem("password", password);
     localStorage.setItem("confirmpassword", confirmpassword);
     localStorage.setItem("isLoggedIn", true);
-    alert("User signed in successfully!");
+    alert(`User ${isSignIn ? "signed in" : "signed up"} successfully!`);
   };
 
   // Function to switch between Sign In and Sign Up
@@ -140,7 +144,8 @@ export default function SignIn() {
   };
 
   return (
-    <Container onClick={() => setIsActive(!isActive)} className={isActive ? "active" : ""}>
+    <>
+    <Container onClick={() => setIsActive(!isActive)} className={`${isActive ? "active" : ""} lg:flex md:hidden hidden`}>
       <Top className="top" />
       <Bottom className="bottom" />
       <Center className="center">
@@ -206,5 +211,88 @@ export default function SignIn() {
         <h2>&nbsp;</h2>
       </Center>
     </Container>
+
+   {/* mobile and tablet view */}
+        <Card className="px-7 pt-[73px] w-full h-screen shadow-xl rounded-2xl bg-white bg-cover bg-center lg:hidden" style={{ backgroundImage: `url(${bg})` }}>
+          <div className="flex justify-center items-center h-fit mb-[-41px]">
+            {/* Placeholder for Logo */}
+<div className="flex justify-center">
+  <img 
+    src={img} 
+    alt="Logo" 
+    width="101" 
+    height="101" 
+    className="w-[101px] h-[101px] rounded-full object-cover border border-gray-300 shadow-md"
+  />
+</div>
+
+          </div>
+          {isSignIn ? (
+          <h2 className="text-[31px] mb-5 mt-16 text-[#A3677D] font-semibold tracking-wider uppercase text-center">
+            Sign In
+          </h2>
+        ) : (
+          <h2 className="text-[31px] mb-5 mt-16 text-[#A3677D] font-semibold tracking-wider uppercase text-center">
+            Sign Up
+          </h2>
+        )}
+         <div className="relative md:w-[75%] my-5 mx-auto">
+          <EmailOutlined className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#c27e94]" />
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full p-3 pl-3 border border-gray-300 rounded-md font-inherit focus:outline-none focus:ring-2 focus:ring-[#c27e94] focus:border-transparent shadow-sm transition-all duration-300"
+          />
+        </div>
+
+        <div className={`relative md:w-[75%] my-${isSignIn ? '5' : '0'} mx-auto`} >
+          <LockOutlined className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#c27e94]" />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full p-3 pl-3 border border-gray-300 rounded-md font-inherit focus:outline-none focus:ring-2 focus:ring-[#c27e94] focus:border-transparent shadow-sm transition-all duration-300"
+          />
+        </div>
+
+   {/* confirm password */}
+   {!isSignIn && (
+          <div className="relative md:w-[75%] my-3 mx-auto">
+            <RepeatIcon className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#c27e94]" />
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              value={confirmpassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              className="w-full p-3 pl-3 my-2 border border-gray-300 rounded-md font-inherit focus:outline-none focus:ring-2 focus:ring-[#c27e94] focus:border-transparent shadow-sm transition-all duration-300"
+            />
+          </div>
+        )}
+
+      <div className="flex justify-center">
+        <button
+          className="w-[41%] py-[13px] mb-3 mt-3 text-lg font-semibold text-white bg-[#A3677D] rounded-md shadow-md transition-all duration-300 hover:bg-[#3B658D] focus:outline-none focus:ring-2 focus:ring-[#8B5668]"
+          onClick={handleSignIn}
+        >
+          {isSignIn ? "Sign In" : "Sign Up"}
+        </button>
+      </div>
+
+        <p className="mt-[5px] mb-[7px] md:text-gray-500 text-white md:bg-white w-[51px] mx-auto rounded-sm font-medium text-center">Or</p>
+
+        <p
+          className="md:w-[15%] w-[31%] mx-auto text-center text-lg font-semibold md:bg-[#A3677D] rounded-md md:mt-5 md:p-3 md:text-white text-[#A3677D] hover:text-[#3B658D] cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#A3677D]"
+          onClick={toggleSignMode}
+        >
+          {isSignIn ? "Sign Up" : "Sign In"}
+        </p>
+        <h2>&nbsp;</h2>
+        </Card>
+
+      </>
+    
   );
 }
