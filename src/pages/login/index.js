@@ -1,17 +1,19 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { EmailOutlined, LockOutlined } from "@mui/icons-material";
-import RepeatIcon from '@mui/icons-material/Repeat';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
+import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';import RepeatIcon from '@mui/icons-material/Repeat';
 import {  Card } from "@mui/material";
 import img from '../../assets/loginlogo.jpg'
 import bg from '../../assets/loginbg.jpeg';
+import { useNavigate } from "react-router-dom";
 
 // for lg screen
 const Container = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  overflow: visible;
   font-family: "Raleway", sans-serif;
   min-height: 100vh;
 
@@ -108,6 +110,9 @@ export default function SignIn() {
   const [isSignIn, setIsSignIn] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showpassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+
   const [confirmpassword, setConfirmPassword] = useState("");
 
   // Load stored state from localStorage
@@ -142,10 +147,16 @@ export default function SignIn() {
     setIsSignIn(!isSignIn);
     localStorage.setItem("isSignIn", JSON.stringify(!isSignIn));
   };
+  const passwordvisibility = () => {
+    console.log("ok")
+    setShowPassword((prev)=>!prev)
+
+  }
 
   return (
     <>
-    <Container onClick={() => setIsActive(!isActive)} className={`${isActive ? "active" : ""} lg:flex md:hidden hidden`}>
+    <Container onClick={() => setIsActive(!isActive)} className={`${isActive ? "active" : ""} lg:flex md:hidden hidden relative`}>
+    <ArrowBackOutlinedIcon onClick={()=>{navigate(-1)}} className="absolute top-5 left-5 text-white z-50 cursor-pointer hover:bg-[#8a5067] transition-all duration-300 ease-in-out" sx={{borderRadius:"50%", height:"31px", width:"31px"}}></ArrowBackOutlinedIcon>
       <Top className="top" />
       <Bottom className="bottom" />
       <Center className="center">
@@ -170,9 +181,10 @@ export default function SignIn() {
         </div>
 
         <div className={`relative w-full my-${isSignIn ? '5' : '0'}`}>
-          <LockOutlined className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#c27e94]" />
-          <input
-            type="password"
+        {showpassword ? <LockOpenIcon onClick={passwordvisibility} className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#c27e94]" /> : <LockOutlined onClick={passwordvisibility} className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#c27e94]" />}
+          <input 
+          id="pw"
+            type={showpassword ? "text" : "password"}
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -214,7 +226,8 @@ export default function SignIn() {
 
    {/* mobile and tablet view */}
         <Card className="px-7 pt-[73px] w-full h-screen shadow-xl rounded-2xl bg-white bg-cover bg-center lg:hidden" style={{ backgroundImage: `url(${bg})` }}>
-          <div className="flex justify-center items-center h-fit mb-[-41px]">
+          <ArrowBackOutlinedIcon className="absolute top-5 left-5 text-white z-50 cursor-pointer hover:bg-[#8a5067] transition-all duration-300 ease-in-out" onClick={()=>navigate(-1)} sx={{borderRadius:"50%", height:"25px", width:"25px"}}></ArrowBackOutlinedIcon>
+        <div className="flex justify-center items-center h-fit mb-[-41px]">
             {/* Placeholder for Logo */}
 <div className="flex justify-center">
   <img 
@@ -247,16 +260,17 @@ export default function SignIn() {
           />
         </div>
 
-        <div className={`relative md:w-[75%] my-${isSignIn ? '5' : '0'} mx-auto`} >
-          <LockOutlined className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#c27e94]" />
-          <input
-            type="password"
+        <div className={`relative md:w-[75%] my-${isSignIn ? '5' : '0'} mx-auto`}>
+        {showpassword ? <LockOpenIcon onClick={passwordvisibility} className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#c27e94]" /> : <LockOutlined onClick={passwordvisibility} className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#c27e94]" />}
+          <input 
+          id="pw"
+            type={showpassword ? "text" : "password"}
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="w-full p-3 pl-3 border border-gray-300 rounded-md font-inherit focus:outline-none focus:ring-2 focus:ring-[#c27e94] focus:border-transparent shadow-sm transition-all duration-300"
           />
-        </div>
+          </div>
 
    {/* confirm password */}
    {!isSignIn && (
