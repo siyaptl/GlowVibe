@@ -43,10 +43,10 @@ function Makeup() {
 
       <div className="flex flex-col md:flex-row justify-between items-left mx-4 md:mx-12 lg:mx-24 gap-7 mb-5">
       {(startIndex + 1) !== (Math.min(startIndex + itemsPerPage, filteredProducts.length)) && (
-  <p className="text-gray-600 text-sm md:text-base mt-2 tracking-widest text-left md:text-left">
-    Showing {startIndex + 1}-{Math.min(startIndex + itemsPerPage, filteredProducts.length)} of {filteredProducts.length} results
-  </p>
-      )}
+        <p className="text-gray-600 text-sm md:text-base mt-2 tracking-widest text-left md:text-left">
+          Showing {startIndex + 1}-{Math.min(startIndex + itemsPerPage, filteredProducts.length)} of {filteredProducts.length} results
+        </p>
+            )}
 
   <select
     className="border border-gray-300 bg-white py-2 px-4 md:py-3 md:px-5 pr-8 tracking-widest text-gray-600 text-sm md:text-base"

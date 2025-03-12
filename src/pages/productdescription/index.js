@@ -13,17 +13,32 @@ import Bgcontent from '../../components/cmpbgcontent';
 function Description() {
   
   const [quantity, setQuantity] = useState(1);
-
   const [activeTab, setActiveTab] = useState("description");
+  const { id } = useParams();
+  const product = beautyProductsrow.find((item) => item.id.toString() === id);
+  const [selectedimg, setSelectedimg] = useState(product.innerimage1)
+
+  const addToCart = () => {
+    let cartItems = JSON.parse(localStorage.getItem("cart")) || []; // Get cart from local storage
+    const existingItemIndex = cartItems.findIndex((item) => item.id === product.id);    if (existingItemIndex !== -1) {
+      // Update quantity for existing product
+      cartItems[existingItemIndex].quantity += quantity;
+    } else {
+      // Add new product with correct quantity
+      cartItems.push({ ...product, quantity });
+    }
+  
+    localStorage.setItem("cart", JSON.stringify(cartItems)); 
+    alert(`${product.name} added to cart!`);
+  };
+    
 
     const [reviews, setReviews] = useState([]);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [review, setReview] = useState("");
     const [rating, setRating] = useState(0);
-
-    const [cart, setCart] = useState([]);
-    const { id } = useParams();
+   
     const handleSubmit = (e) => {
       e.preventDefault();
       if (name && email && review && rating) {
@@ -37,15 +52,7 @@ function Description() {
         alert("Please fill in all fields.");
       }
     }
-    // Find the product that matches the ID
-  const product = beautyProductsrow.find((item) => item.id.toString() === id);
-  
-  const [selectedimg, setSelectedimg] = useState(product.innerimage1)
-
-  const handleAddToCart = () => {
-    setCart([...cart, product]);
-    alert(`${product.name} has been added to your cart!`);
-  };
+      
         
   return (
     <>
@@ -108,7 +115,7 @@ function Description() {
                 </button>
               </div>
 
-              <button onClick={handleAddToCart} className="bg-black text-white lg:px-5 w-[150px] md:px-4 py-[6.5px] hover:bg-[#c27e94] hover:text-black transition">
+              <button onClick={addToCart} className="bg-black text-white lg:px-5 w-[150px] md:px-4 py-[6.5px] hover:bg-[#c27e94] hover:text-black transition">
               ADD TO CART
                       </button>
                 </div>
