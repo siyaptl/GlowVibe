@@ -5,6 +5,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Link, useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
+import ShopTwoRoundedIcon from '@mui/icons-material/ShopTwoRounded';
 
 function Header() {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -57,6 +58,10 @@ function Header() {
           </IconButton>
 
           <span className="hidden lg:block text-black font-bold mr-1 ml-1">$0.00</span>
+          
+          <IconButton onClick={() => navigate("/cart")} className="lg:block hidden">
+            <ShopTwoRoundedIcon className="lg:text-[#1f1d1f] md:text-[#C8A2C8] text-[#C8A2C8]" sx={{width:"21px", height:"21px"}} />
+          </IconButton>
 
           <IconButton className="lg:hidden" onClick={toggleDrawer(true)} sx={{ display: isMobile ? 'flex' : 'none' }}>
             <MenuIcon className="text-[#C8A2C8]" />
@@ -77,7 +82,7 @@ function Header() {
           },
         }}
       >
-        {/* Close Button */}
+                {/* Close Button */}
         <IconButton
           onClick={toggleDrawer(false)}
           sx={{ position: "absolute", top: 10, right: 10 }}

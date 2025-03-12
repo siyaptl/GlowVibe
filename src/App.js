@@ -13,6 +13,7 @@ import Skincare from './pages/skincare';
 import Faq from './pages/faq';
 import Description from './pages/productdescription'; 
 import Login from './pages/login';
+import Cart from './pages/cart';
 
 export default function App() {
   return (
@@ -28,6 +29,7 @@ export default function App() {
         <Route path="/faq" element={<Faq />} />
         <Route path="/description/:id" element={<Description />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </Router>
   )
