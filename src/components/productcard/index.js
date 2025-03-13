@@ -3,6 +3,7 @@ import LocalMallIcon from '@mui/icons-material/LocalMall';
 import { styled } from '@mui/material/styles';
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function Productcard({ id, name, price, discountPrice, innerimage1 }) {
   
@@ -18,19 +19,55 @@ function Productcard({ id, name, price, discountPrice, innerimage1 }) {
   }));
 
   const navigate = useNavigate();
+  const [quantity] = useState(1); // Default quantity as 1
 
   const handleClick = () => {
     navigate(`/description/${id}`);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const addToCart = (event) => {
+    event.stopPropagation(); // Prevent navigation when clicking the cart icon
+  // Check if this works
+
+    let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+    const existingItemIndex = cartItems.findIndex((item) => item.id === id);
+
+    if (existingItemIndex !== -1) {
+        cartItems[existingItemIndex].quantity += quantity;
+    } else {
+        cartItems.push({ id, name, price, discountPrice, innerimage1, quantity });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cartItems));
+
+    // Show message feedback
+    const parentElement = document.getElementById("parent");
+        parentElement.innerHTML = `${name} Added Successfully!`;
+        parentElement.style.backgroundColor = "#e2aebc";
+        parentElement.style.color = "#3d1c25"
+        parentElement.style.visibility = "visible";
+        parentElement.style.opacity = "1";
+        parentElement.style.transition = "opacity 0.5s ease-in-out";
+
+        setTimeout(() => {
+            parentElement.style.opacity = "0"; // Fade out effect
+            setTimeout(() => {
+                parentElement.style.visibility = "hidden"; // Hide the element
+                parentElement.style.backgroundColor = ""; // Reset background
+            }, 500);
+        }, 3000);
+};
+
   return (
     <div className="lg:mb-0 mb-2 bg-white relative group" onClick={handleClick}>
+            <div id="parent" className='fixed top-0 left-0 w-full py-2 text-center shadow-md z-50 invisible'></div>
+
       {/* Product Image Placeholder */}
       <div className="hover:shadow-xl transition-all duration-300 ease-in-out hover:scale-100 min-w-[111px] w-full bg-pink-100 rounded-lg">
         <img src={innerimage1} alt={name}/>
-        <span className="absolute opacity-0 group-hover:opacity-100 top-3 right-3 bg-[#fdfdfb] h-9 w-9 mt-0 flex items-center justify-center rounded-full shadow-md ">
-          <BootstrapTooltip title={<span style={{ fontSize: '13px', padding:'11px' }}>Add to cart</span>} placement="left">
+        <span className="absolute opacity-0 lg:flex md:hidden group-hover:opacity-100 top-3 right-3 bg-[#fdfdfb] h-9 w-9 mt-0 hidden items-center justify-center rounded-full shadow-md ">
+          <BootstrapTooltip onClick={addToCart} title={<span style={{ fontSize: '13px', padding:'11px' }}>Add to cart</span>} placement="left">
             <LocalMallIcon className="text-slate-700 " fontSize="small" />
           </BootstrapTooltip>
         </span>

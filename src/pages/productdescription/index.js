@@ -9,6 +9,7 @@ import Footer from '../../components/cmpfooter';
 import { beautyProductsrow } from '../../config/staticdata';
 import krudes from '../../assets/krupdes.jpg';
 import Bgcontent from '../../components/cmpbgcontent';
+import Cart from '../cart';
 
 function Description() {
   
@@ -19,18 +20,36 @@ function Description() {
   const [selectedimg, setSelectedimg] = useState(product.innerimage1)
 
   const addToCart = () => {
-    let cartItems = JSON.parse(localStorage.getItem("cart")) || []; // Get cart from local storage
-    const existingItemIndex = cartItems.findIndex((item) => item.id === product.id);    if (existingItemIndex !== -1) {
-      // Update quantity for existing product
-      cartItems[existingItemIndex].quantity += quantity;
+    let cartItems = JSON.parse(localStorage.getItem("cart")) || []; 
+    const existingItemIndex = cartItems.findIndex((item) => item.id === product.id);
+
+    if (existingItemIndex !== -1) {
+        cartItems[existingItemIndex].quantity += quantity;
     } else {
-      // Add new product with correct quantity
-      cartItems.push({ ...product, quantity });
+        cartItems.push({ ...product, quantity });
     }
-  
+
     localStorage.setItem("cart", JSON.stringify(cartItems)); 
-    alert(`${product.name} added to cart!`);
-  };
+
+    const parentElement = document.getElementById("parent");
+    if (parentElement) {
+        parentElement.innerHTML = `${product.name} Added Successfully!`;
+        parentElement.style.backgroundColor = "#e2aebc";
+        parentElement.style.color = "#3d1c25"
+        parentElement.style.visibility = "visible";
+        parentElement.style.opacity = "1";
+        parentElement.style.transition = "opacity 0.5s ease-in-out";
+
+        setTimeout(() => {
+            parentElement.style.opacity = "0"; // Fade out effect
+            setTimeout(() => {
+                parentElement.style.visibility = "hidden"; // Hide the element
+                parentElement.style.backgroundColor = ""; // Reset background
+            }, 500); // Wait for fade-out transition before hiding
+        }, 3000); // Display for 3 sec
+    }
+};
+
     
 
     const [reviews, setReviews] = useState([]);
@@ -58,6 +77,7 @@ function Description() {
     <>
       <Header />
       <hr className="w-full border-t-1 border-gray-200" />
+      <div id="parent" className='fixed top-0 left-0 w-full py-3 text-center shadow-md z-50 invisible'></div>
 
       <div className="flex justify-center items-center lg:mt-[110px] mt-5 md:mt-[50px]">
             <div className="lg:w-[83%] md:w-[85%] w-[91%] flex md:flex-col lg:flex-row flex-col">
