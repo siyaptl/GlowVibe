@@ -9,7 +9,6 @@ import Footer from '../../components/cmpfooter';
 import { beautyProductsrow } from '../../config/staticdata';
 import krudes from '../../assets/krupdes.jpg';
 import Bgcontent from '../../components/cmpbgcontent';
-import Cart from '../cart';
 
 function Description() {
   
@@ -30,6 +29,7 @@ function Description() {
     }
 
     localStorage.setItem("cart", JSON.stringify(cartItems)); 
+    window.dispatchEvent(new Event("cartUpdated"));
 
     const parentElement = document.getElementById("parent");
     if (parentElement) {
@@ -45,8 +45,8 @@ function Description() {
             setTimeout(() => {
                 parentElement.style.visibility = "hidden"; // Hide the element
                 parentElement.style.backgroundColor = ""; // Reset background
-            }, 500); // Wait for fade-out transition before hiding
-        }, 3000); // Display for 3 sec
+            }, 300); // Wait for fade-out transition before hiding
+        }, 1500); // Display for 3 sec
     }
 };
 
@@ -77,7 +77,7 @@ function Description() {
     <>
       <Header />
       <hr className="w-full border-t-1 border-gray-200" />
-      <div id="parent" className='fixed top-0 left-0 w-full py-3 text-center shadow-md z-50 invisible'></div>
+      <div id="parent" className='fixed top-0 left-0  w-[76%] ml-[12%] py-3 text-center shadow-md z-50 invisible'></div>
 
       <div className="flex justify-center items-center lg:mt-[110px] mt-5 md:mt-[50px]">
             <div className="lg:w-[83%] md:w-[85%] w-[91%] flex md:flex-col lg:flex-row flex-col">

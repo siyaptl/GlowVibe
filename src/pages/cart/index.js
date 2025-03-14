@@ -14,37 +14,40 @@ function Cart() {
   const updateCart = (updatedCart) => {
     setCart(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
+    window.dispatchEvent(new Event("cartUpdated"));
   };
+
 
   const handleQuantityChange = (index, delta) => {
     const updatedCart = [...cart];
     if (updatedCart[index].quantity + delta > 0) {
       updatedCart[index].quantity += delta;
+      updateCart(updatedCart);
     }
-    updateCart(updatedCart);
   };
 
   const handleRemoveItem = (index) => {
     const itemName = cart[index]?.name;
     const updatedCart = cart.filter((_, i) => i !== index);
     updateCart(updatedCart);
-   
+    
     const parentElement = document.getElementById("parent");
-    if (parentElement) {  
-    parentElement.innerHTML = `${itemName} Removed Successfully!`;
-      parentElement.style.backgroundColor = "#e2aebc"; 
-      parentElement.style.color = "#3d1c25"
+    if (parentElement) {
+      parentElement.textContent = `${itemName} Removed Successfully!`;
+      parentElement.style.backgroundColor = "#e2aebc";
+      parentElement.style.color = "#3d1c25";
       parentElement.style.visibility = "visible";
       setTimeout(() => {
-          parentElement.remove();
-      }, 3000);
+        parentElement.style.visibility = "hidden";
+      }, 1500);
     }
-    };
+  };
+
       return (
     <div>
       <Header />
       <hr></hr>
-      <p id="parent" className='fixed top-0 left-0 w-full py-3 text-center shadow-md z-50 invisible'> </p>
+      <p id="parent" className='fixed top-0 left-0 w-[76%] ml-[12%] py-3 text-center shadow-md z-50 invisible'> </p>
 
     {/* large screen */}
     {cart.length === 0 ? (

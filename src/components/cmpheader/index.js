@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Typography from '@mui/material/Typography';
-import { Toolbar, Button, Drawer, List, ListItemButton, ListItemText, IconButton, Divider } from '@mui/material';
+import { Toolbar, Button, Drawer, List, ListItemButton, ListItemText, IconButton, Divider, Badge } from '@mui/material';
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Link, useLocation } from 'react-router-dom';
@@ -13,8 +13,41 @@ function Header() {
   const navigate = useNavigate();
   const location = useLocation();
   const [selectedItem, setSelectedItem] = useState(location.pathname);
+  const [cartItemCount, setCartItemCount] = useState(3); 
 
-  // Toggle drawer function
+  const updateCartCount = () => {
+    const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+    const totalQuantity = cartItems.reduce((total, item) => total + (item.quantity || 1), 0);
+    setCartItemCount(totalQuantity);
+  };  
+
+  useEffect(() => {
+    const handleCartUpdate = () => {
+      const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+      const totalQuantity = cartItems.reduce((total, item) => total + (item.quantity || 1), 0);
+      setCartItemCount(totalQuantity);
+    };
+  
+    // Fetch the cart count when the component mounts
+    handleCartUpdate();
+  
+    // Listen for custom cart update events
+    window.addEventListener("cartUpdated", handleCartUpdate);
+  
+    // Listen for localStorage changes (detects cart updates from anywhere in the app)
+    const handleStorageChange = (event) => {
+      if (event.key === "cart") {
+        handleCartUpdate();
+      }
+    };
+    window.addEventListener("storage", handleStorageChange);
+  
+    return () => {
+      window.removeEventListener("cartUpdated", handleCartUpdate);
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
+
   const toggleDrawer = (open) => () => {
     setDrawerOpen(open);
   };
@@ -60,7 +93,25 @@ function Header() {
           <span className="hidden lg:block text-black font-bold mr-1 ml-1">$0.00</span>
           
           <IconButton onClick={() => navigate("/cart")} className="lg:block hidden">
-            <ShopTwoRoundedIcon className="lg:text-[#1f1d1f] md:text-[#C8A2C8] text-[#C8A2C8]" sx={{width:"21px", height:"21px"}} />
+          <Badge 
+              badgeContent={cartItemCount} 
+              sx={{
+                '& .MuiBadge-badge': {
+                  backgroundColor: 'black',  // Set badge background color to black
+                  color: 'white',            // Set text color to white
+                  fontSize: '13px',          // Adjust font size
+                  width: '19px',             // Set width of the badge
+                  height: '19px',            // Set height of the badge
+                  minWidth: '19px',
+                  borderRadius: '50%',       // Make it a circle
+                  top: -3,                    // Adjust vertical position
+                  right: -3,                  // Adjust horizontal position
+                }
+              }}
+              overlap="circular"
+            >       
+           <ShopTwoRoundedIcon className="lg:text-[#1f1d1f] md:text-[#C8A2C8] text-[#C8A2C8]" sx={{width:"21px", height:"21px"}} />
+            </Badge>
           </IconButton>
 
           <IconButton className="lg:hidden" onClick={toggleDrawer(true)} sx={{ display: isMobile ? 'flex' : 'none' }}>
