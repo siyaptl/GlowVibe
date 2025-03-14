@@ -11,7 +11,7 @@ function About() {
     <>
       < Header />
       {/* large and medium screen */}
-      <div className='w-screen bg-white lg:flex md:flex hidden justify-evenly pb-0'>
+      <div className='w-[100%] bg-white lg:flex md:flex hidden justify-evenly pb-0'>
                 <div className='h-[511px] lg:w-[98%] md:w-[96%] w-[99%] bg-cover bg-bottom' style={{ backgroundImage: `url(${aboutimg})` }}>
                 <div className='lg:ml-[93px] lg:mt-[215px]
                                 md:ml-[23px] md:mt-[213px]'>
@@ -22,7 +22,7 @@ function About() {
       </div>
 
         {/* small screen */}
-      <div className='w-screen bg-white pt-0 pb-11 lg:hidden md:hidden block'>
+      <div className='w-[100%] bg-white pt-0 pb-11 lg:hidden md:hidden block'>
                 <div className='h-[271px] w-[91%] bg-cover bg-left mx-auto' style={{ backgroundImage: `url(${aboutimg})`}}>
                 <div className='mt-[5px] pt-24 pl-5 mx-auto'>
                       <div className='text-[#FFFFFF] drop-shadow-md text-[15px] font-serif ... leading-[15.25px] mb-3'>A few words</div>
@@ -58,7 +58,7 @@ function About() {
     </div>
 
     {/* 2nd bg content */}
-    <div className='w-screen bg-white flex justify-center items-center pb-7 lg:h-[671px] md:h-[541px] h-[525px]'>
+    <div className='w-[100%] bg-white flex justify-center items-center pb-7 lg:h-[671px] md:h-[541px] h-[525px]'>
                 <div className='lg:h-[100%] md:h-[100%] h-[100%] w-[90%] bg-cover bg-center' style={{ backgroundImage: `url(${aboutimg2})` }}>
                 <div className='lg:pt-16 md:pt-24 pt-[25%] flex items-center lg:mt-24 flex-col'>
                       <div className='text-[#FFFFFF] drop-shadow-md lg:text-[45px] md:text-[41px] text-[29px] leading-[45px] font-serif ... font-normal'>About Our Products</div>

@@ -22,7 +22,7 @@ function Bgimg() {
   return (
     <>
       <div 
-            className="lg:fixed scroll top-0 w-screen bg-cover border-white bg-center bg-no-repeat z-[-1] border-x-8 lg:h-[100%] md:h-[571px] h-[413px]"
+            className="lg:fixed scroll top-0 w-[100%] bg-cover border-white bg-center bg-no-repeat z-[-1] border-x-8 lg:h-[100%] md:h-[571px] h-[413px]"
             style={{ backgroundImage: `url(${bgImg})` }}
             >
        </div>

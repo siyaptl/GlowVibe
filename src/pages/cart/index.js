@@ -30,13 +30,15 @@ function Cart() {
     updateCart(updatedCart);
    
     const parentElement = document.getElementById("parent");
-      parentElement.innerHTML = `${itemName} Removed Successfully!`;
+    if (parentElement) {  
+    parentElement.innerHTML = `${itemName} Removed Successfully!`;
       parentElement.style.backgroundColor = "#e2aebc"; 
       parentElement.style.color = "#3d1c25"
       parentElement.style.visibility = "visible";
       setTimeout(() => {
           parentElement.remove();
       }, 3000);
+    }
     };
       return (
     <div>

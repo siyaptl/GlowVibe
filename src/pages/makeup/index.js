@@ -62,7 +62,7 @@ function Makeup() {
   </select>
 </div>
 
-      <div className="w-screen bg-white grid lg:grid-cols-4 lg:grid-rows-1 md:grid-cols-3 grid-cols-2 gap-4 gap-y-11 p-4 lg:mb-16">
+      <div className="w-[100%] bg-white grid lg:grid-cols-4 lg:grid-rows-1 md:grid-cols-3 grid-cols-2 gap-4 gap-y-11 p-4 lg:mb-16">
         {paginatedProducts.map((product) => (
           <Productcard
             key={product.id}

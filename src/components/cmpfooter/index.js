@@ -11,14 +11,14 @@ function Footer() {
                 <input
                     type="email"
                     placeholder="Your email address..."
-                    className="border border-gray-300 px-4 py-3 lg:w-full md:w-64 w-full md:ml-20 sm:w-96 rounded-sm focus:outline-none focus:ring-2 focus:ring-pink-300"
+                    className="border border-gray-300 px-4 py-3 lg:w-full md:w-64 w-[100%] md:ml-20 sm:w-96 rounded-sm focus:outline-none focus:ring-2 focus:ring-pink-300"
                 />
                 <button className="bg-black text-white lg:px-5 md:px-4 py-3 w-full rounded-sm hover:bg-[#c27e94] hover:text-black transition">
                     SUBSCRIBE
                 </button>
                 </div>
             </div>
-            <hr className='border-t-1 border-gray-500 w-full md:mt-5 mt-5 lg:mt-7'/>
+            <hr className='border-t-1 border-gray-500 w-[100%] md:mt-5 mt-5 lg:mt-7'/>
 
             {/* Footer Content */}
             <div className="container mx-auto px-5 py-1 mt-10 lg:mb-10 md:mb-12">
@@ -30,7 +30,7 @@ function Footer() {
                 </div>
 
                 {/* Navigation Links */}
-                <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-rows-1 lg:ml-[213px] lg:w-[411px] md:ml-20 md:w-[281px]">
+                <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-rows-1 lg:ml-[51%] lg:w-[311px] md:ml-20 md:w-[275px]">
                     <ul className="space-y-1 lg:mt-3 md:mt-4">
                     <li><a href="/shopall" className="hover:text-gray-500">Shop All</a></li>
                     <li><a href="/makeup" className="hover:text-gray-500">Makeup</a></li>
@@ -48,7 +48,7 @@ function Footer() {
                 </div>
 
                 {/* Social Icons */}
-                <div className="flex justify-center md:justify-start lg:space-x-5 md:space-x-1 space-x-1 pb-5 lg:ml-20 lg:pt-[61px] md:pl-40 md:pt-[71px] pt-5">
+                <div className="flex justify-center md:justify-start lg:space-x-5 md:space-x-1 space-x-1 pb-5 lg:ml-5 lg:pt-[61px] md:pl-40 md:pt-[71px] pt-5">
                 <button onClick={() => window.open("https://facebook.com", "_blank")} className="text-gray-900 hover:text-pink-300 text-xl">
                     <i className="fab fa-facebook"></i>
                     </button>
@@ -61,7 +61,7 @@ function Footer() {
                 </div>
                 </div>
             </div>
-            <hr className='border-t-1 border-gray-500 w-full mt-5'/>
+            <hr className='border-t-1 border-gray-500 w-[100%] mt-5'/>
 
             {/* Copyright */}
             <div className="lg:py-11 md:py-11 py-11 flex items-center lg:pl-14 md:pl-7 lg:justify-normal md:justify-normal justify-center text-center text-gray-600 lg:text-base md:text-sm text-[13px] tracking-wider">

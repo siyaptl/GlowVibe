@@ -42,7 +42,7 @@ const Layer = styled.div`
     content: "";
     display: block;
     position: absolute;
-    width: 200vmax;
+    width: 100vmax;
     height: 200vmax;
     top: 50%;
     left: 50%;

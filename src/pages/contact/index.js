@@ -24,7 +24,7 @@ function Contact() {
     <>
      <Header />    
 
-     <div className='w-screen bg-white lg:flex md:flex hidden justify-evenly pb-0'>
+     <div className='w-[100%] bg-white lg:flex md:flex hidden justify-evenly pb-0'>
                 <div className='h-[511px] lg:w-[98%] md:w-[95%] w-[99%] bg-cover bg-center relative' style={{ backgroundImage: `url(${aboutimg})` }}>
                 <div className='lg:h-[311px] lg:w-[35%] md:h-[351px] md:w-[41%] bg-cover bg-center absolute lg:top-24 lg:right-32 md:top-20 md:right-10 lg:block md:block hidden' style={{ backgroundImage: `url(${bgimgicon})` }}>
                 </div>
@@ -37,7 +37,7 @@ function Contact() {
       </div>
 
         {/* small screen */}
-      <div className='w-screen bg-white pt-0 pb-11 lg:hidden md:hidden block'>
+      <div className='w-[100%] bg-white pt-0 pb-11 lg:hidden md:hidden block'>
                 <div className='h-[271px] w-[91%] bg-cover bg-left mx-auto' style={{ backgroundImage: `url(${aboutimg})`}}>
                 <div className='h-[131px] w-[25%] bg-cover bg-center absolute top-32 right-7 lg:hidden md:hidden block' style={{ backgroundImage: `url(${bgimgicon})` }}>
                 </div>
