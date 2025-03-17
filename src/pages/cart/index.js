@@ -14,8 +14,12 @@ function Cart() {
   const updateCart = (updatedCart) => {
     setCart(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
+    
+    const total = calculateTotalPrice(updatedCart);  // Ensure total is calculated
+    localStorage.setItem("totalPrice", total.toFixed(2)); 
+    
     window.dispatchEvent(new Event("cartUpdated"));
-  };
+};
 
 
   const handleQuantityChange = (index, delta) => {
@@ -24,7 +28,7 @@ function Cart() {
       updatedCart[index].quantity += delta;
       updateCart(updatedCart);
     }
-  };
+  };  
 
   const handleRemoveItem = (index) => {
     const itemName = cart[index]?.name;
@@ -42,6 +46,12 @@ function Cart() {
       }, 1500);
     }
   };
+
+  const calculateTotalPrice = (cartItems) => {
+    return cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+};
+// console.log(localStorage.getItem("totalPrice"));
+
 
       return (
     <div>

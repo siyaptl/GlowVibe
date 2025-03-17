@@ -9,25 +9,23 @@ import ShopTwoRoundedIcon from '@mui/icons-material/ShopTwoRounded';
 
 function Header() {
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [cartVisible, setCartVisible] = useState(false); // State for cart visibility
   const isMobile = window.innerWidth <= 450;
   const navigate = useNavigate();
   const location = useLocation();
   const [selectedItem, setSelectedItem] = useState(location.pathname);
   const [cartItemCount, setCartItemCount] = useState(3); 
-
-  const updateCartCount = () => {
-    const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
-    const totalQuantity = cartItems.reduce((total, item) => total + (item.quantity || 1), 0);
-    setCartItemCount(totalQuantity);
-  };  
+  const [totalPrice, setTotalCartPrice] = useState(0); 
 
   useEffect(() => {
     const handleCartUpdate = () => {
       const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
       const totalQuantity = cartItems.reduce((total, item) => total + (item.quantity || 1), 0);
       setCartItemCount(totalQuantity);
+      const totalPrice = cartItems.reduce((total, item) => total + (item.quantity || 1) * item.price, 0);
+      setTotalCartPrice(totalPrice); // Assuming you have a state to store total price
     };
-  
+    
     // Fetch the cart count when the component mounts
     handleCartUpdate();
   
@@ -60,10 +58,68 @@ function Header() {
     { text: "ABOUT", path: "/about" },
     { text: "CONTACT", path: "/contact" },
   ];
+  useEffect(() => {
+    if (cartVisible) {
+      document.body.style.overflow = "hidden"; // Disable scrolling
+    } else {
+      document.body.style.overflow = "auto"; // Enable scrolling
+    }
+  
+    return () => {
+      document.body.style.overflow = "auto"; // Cleanup function to ensure scrolling is restored
+    };
+  }, [cartVisible]);
+  
+
+  function cartSection() {
+    setCartVisible(true); // This correctly updates the state
+  }  
 
   return (
     <>
-      <Toolbar className='h-81 flex justify-between bg-white'>
+
+{cartVisible && (
+  <>
+    {/* Backdrop to disable the rest of the page */}
+    <div 
+      className="fixed inset-0 bg-black opacity-50 z-40 h-screen"
+      onClick={() => setCartVisible(false)} // Click on the backdrop to close the cart
+    >
+    </div>
+
+    {/* Cart Section */}
+    <div id="cartparent" className='fixed top-0 bg-white h-[100%] right-0 lg:w-[25%] md:w-[41%] w-[81%] py-3 text-center shadow-md z-50'>
+            <div className='flex justify-between px-5 py-[3px]'>
+              <p className='tracking-wider text-xl'>Shopping Cart</p>
+              <button 
+                className="text-3xl text-gray-500 hover:text-gray-700"
+                onClick={() => setCartVisible(false)}
+              >
+                &times;
+              </button>
+            </div>
+      <hr></hr>
+
+      <div className="border-t border-gray-200 p-4 w-[100%] px-5 absolute bottom-0">
+          <div className="flex justify-between items-center mb-4">
+            <span className="text-base font-medium text-gray-900">Subtotal:</span>
+            <span className="text-base font-medium text-gray-900">${totalPrice.toFixed(2)}</span>
+          </div>
+
+      <button onClick={() => navigate("/cart")} className="w-[100%] bg-black text-white py-3 px-5 font-medium mb-2 hover:bg-gray-800 transition-colors">
+        VIEW CART
+      </button>
+
+      <button  className="w-[100%] bg-black text-white py-3 px-5 font-medium hover:bg-gray-800 transition-colors">
+        CHECKOUT
+      </button>
+  </div>
+    </div>
+  </>
+)}
+
+
+        <Toolbar className='h-81 flex justify-between bg-white'>
         <Typography variant='h6' className='w-104 h-81 flex justify-between'>
           <strong>GLOW VIBE</strong>
         </Typography>
@@ -92,7 +148,7 @@ function Header() {
 
           <span className="hidden lg:block text-black font-bold mr-1 ml-1">$0.00</span>
           
-          <IconButton onClick={() => navigate("/cart")} className="lg:block hidden">
+          <IconButton onClick={cartSection} className="lg:block hidden">
           <Badge 
               badgeContent={cartItemCount} 
               sx={{
