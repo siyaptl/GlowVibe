@@ -69,9 +69,21 @@ function Productcard({ id, name, price, discountPrice, innerimage1 }) {
       <div className="hover:shadow-xl transition-all duration-300 ease-in-out hover:scale-100 min-w-[111px] w-full bg-pink-100 rounded-lg">
         <img src={innerimage1} alt={name}/>
         <span className="absolute opacity-0 lg:flex md:hidden group-hover:opacity-100 top-3 right-3 bg-[#fdfdfb] h-9 w-9 mt-0 hidden items-center justify-center rounded-full shadow-md ">
-          <BootstrapTooltip onClick={addToCart} title={<span style={{ fontSize: '13px', padding:'11px' }}>Add to cart</span>} placement="left">
-            <LocalMallIcon className="text-slate-700 " fontSize="small" />
-          </BootstrapTooltip>
+        <BootstrapTooltip title={<span style={{ fontSize: '13px', padding: '11px' }}>Add to cart</span>} placement="left">
+  <span
+    onClick={(event) => {
+      event.stopPropagation(); // Prevent click from reaching the parent
+          if (window.confirm(`'${name}' will be added to the cart!`)) {
+            addToCart(event);
+          }
+        }}
+        className="cursor-pointer"
+      >
+        <LocalMallIcon className="text-slate-700" fontSize="small" />
+      </span>
+    </BootstrapTooltip>
+
+
         </span>
       </div>
 

@@ -9,11 +9,11 @@ function Cart() {
      const navigate = useNavigate(); // Initialize navigate
 
      useEffect(() => {
-    const storedCart = localStorage.getItem("cart");
-    if (storedCart) {
-      setCart(JSON.parse(storedCart));
-    }
-  }, []);
+      const storedCart = localStorage.getItem("cart");
+      if (storedCart) {
+        setCart(JSON.parse(storedCart));
+      }
+    }, []);
 
   const updateCart = (updatedCart) => {
     setCart(updatedCart);
@@ -25,32 +25,45 @@ function Cart() {
     window.dispatchEvent(new Event("cartUpdated"));
 };
 
-
   const handleQuantityChange = (index, delta) => {
     const updatedCart = [...cart];
     if (updatedCart[index].quantity + delta > 0) {
       updatedCart[index].quantity += delta;
       setCart(updatedCart);
-      // updateCart(updatedCart);
+      calculateTotalPrice(updatedCart);
     }
   };  
 
-  const handleRemoveItem = (index) => {
-    const itemName = cart[index]?.name;
+  const handleRemoveItem = (index,item) => {
     const updatedCart = cart.filter((_, i) => i !== index);
-    updateCart(updatedCart);
-    
+    setCart(updatedCart)
+    if(window.confirm(`'${item.name}' will be removed from the cart!`)){
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+
+      const total = calculateTotalPrice(updatedCart);  // Ensure total is calculated
+      localStorage.setItem("totalPrice", total.toFixed(2)); 
+
+      window.dispatchEvent(new Event("cartUpdated"));
+    }
+
     const parentElement = document.getElementById("parent");
     if (parentElement) {
-      parentElement.textContent = `${itemName} Removed Successfully!`;
-      parentElement.style.backgroundColor = "#D8E3C6";
-      parentElement.style.color = "#3d1c25";
-      parentElement.style.visibility = "visible";
-      setTimeout(() => {
-        parentElement.style.visibility = "hidden";
-      }, 1500);
+        parentElement.innerHTML = `${item.name} Removed Successfully!`;
+        parentElement.style.backgroundColor = "#D8E3C6";
+        parentElement.style.color = "#3d1c25"
+        parentElement.style.visibility = "visible";
+        parentElement.style.opacity = "1";
+        parentElement.style.transition = "opacity 0.5s ease-in-out";
+
+        setTimeout(() => {
+            parentElement.style.opacity = "0"; // Fade out effect
+            setTimeout(() => {
+                parentElement.style.visibility = "hidden"; // Hide the element
+                parentElement.style.backgroundColor = ""; // Reset background
+            }, 300); // Wait for fade-out transition before hiding
+        }, 1500); // Display for 3 sec
     }
-  };
+      };
 
   const calculateTotalPrice = (cartItems) => {
     return cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
@@ -60,7 +73,7 @@ function Cart() {
     <div>
       <Header />
       <hr></hr>
-      <ArrowBackOutlinedIcon onClick={()=>{navigate(-1)}} className="absolute top-[95px] left-5 text-gray-500 z-50 cursor-pointer hover:text-gray-700 transition-all duration-300 ease-in-out" sx={{borderRadius:"50%", height:"31px", width:"31px"}}></ArrowBackOutlinedIcon>
+      <ArrowBackOutlinedIcon onClick={()=>{navigate(-1)}} className="absolute lg:top-[95px] lg:left-5 md:top-[81px] md:left-7 top-[73px] left-3 text-gray-500 z-50 cursor-pointer hover:text-gray-700 transition-all duration-300 ease-in-out" sx={{borderRadius:"50%", height:"31px", width:"31px"}}></ArrowBackOutlinedIcon>
 
       <p id="parent" className='fixed top-0 left-0 w-[76%] ml-[12%] py-3 text-center shadow-md z-50 invisible'> </p>
 
@@ -69,7 +82,7 @@ function Cart() {
         <div className="text-center mt-10 text-gray-500 text-2xl">
           Your cart is empty.
         </div>
-      ) : (<div className="container w-[87%] mx-auto p-4 mt-20 lg:block md:hidden hidden">
+      ) : (<div className="container w-[87%] mx-auto p-4 mt-2 lg:block md:hidden hidden">
             <p className="text-4xl tracking-wide font-serif text-gray-800 mb-5">Cart</p>
 
       {/* Cart Table */}
@@ -90,7 +103,7 @@ function Cart() {
             { cart.map((item, index) => (
             <tr key={index} className="h-28  border-[1px]">        
               <td className="p-3">
-              <button onClick={() => handleRemoveItem(index)} className="text-gray-400 border rounded-full border-gray-400 hover:text-gray-500 hover:border-gray-500 ml-7 h-7 w-7 text-2xl flex items-center justify-center">
+              <button onClick={() => handleRemoveItem(index,item)} className="text-gray-400 border rounded-full border-gray-400 hover:text-gray-500 hover:border-gray-500 ml-7 h-7 w-7 text-2xl flex items-center justify-center">
                 <Trash2 size={13} />
                   </button>
               </td>
@@ -146,7 +159,11 @@ function Cart() {
           />
           <button className="bg-black text-white text-sm w-[45%] px-4 py-3">APPLY COUPON</button>
         </div>
-        <button className="bg-gray-700 text-white hover:bg-gray-900 text-sm px-6 py-2 rounded">
+        <button onClick={() => {
+    if (window.confirm("Do you want to update the cart?")) {
+      updateCart(cart);
+    }
+  }}  className="bg-gray-700 text-white hover:bg-gray-900 text-sm px-6 py-2 rounded">
           UPDATE CART
         </button>
       </div>)}
@@ -155,7 +172,7 @@ function Cart() {
 
     {/* medu=ium and small screen */}
     {cart.length === 0 ? ("") :(
-    <div className="container w-[100%] mx-auto p-4 lg:hidden md:flex md:flex-col flex flex-col">
+    <div className="container w-[100%] mx-auto p-4 lg:hidden md:flex md:flex-col flex flex-col mt-16">
       <p className="text-4xl tracking-wide font-serif text-gray-800 mb-5">Cart</p>
 
       {/* Cart Table */}
@@ -164,7 +181,7 @@ function Cart() {
         <div className="w-full border-[1px] border-slate-300">
         <div className="w-full flex justify-end p-3 border-y-[1px]">
           <span className="text-gray-700 tracking-wider">
-            <button onClick={() => handleRemoveItem(index)} className="rounded-full text-gray-400 border border-gray-400 hover:text-gray-500 hover:border-gray-500 ml-7 h-7 w-7 text-2xl flex items-center justify-center">
+            <button onClick={() => handleRemoveItem(index,item)} className="rounded-full text-gray-400 border border-gray-400 hover:text-gray-500 hover:border-gray-500 ml-7 h-7 w-7 text-2xl flex items-center justify-center">
                     &times;
                   </button>
                    </span>
@@ -213,7 +230,13 @@ function Cart() {
     />
     <button className="bg-black text-white px-5 py-[11px] ml-1">APPLY COUPON</button>
   </div>
-  <button className="bg-gray-500 text-white px-6">
+  <button 
+  onClick={() => {
+    if (window.confirm("Do you want to update the cart?")) {
+      updateCart(cart);
+    }
+  }} 
+  className="bg-gray-700 text-white hover:bg-gray-900 px-6">
     UPDATE CART
   </button>
 </div>
@@ -230,7 +253,11 @@ function Cart() {
           />
           <button className="bg-black text-white px-4 text-base w-[49%]">APPLY COUPON</button>
         </div>
-        <button className="bg-gray-500 text-white px-6 py-2 w-[99%]">
+        <button onClick={() => {
+    if (window.confirm("Do you want to update the cart?")) {
+      updateCart(cart);
+    }
+  }}  className="bg-gray-700 text-white hover:bg-gray-900 px-6 py-2 w-[99%]">
           UPDATE CART
         </button>
       </div>

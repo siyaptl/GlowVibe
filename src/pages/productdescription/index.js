@@ -80,12 +80,12 @@ function Description() {
   return (
     <>
       <Header />
-      <ArrowBackOutlinedIcon onClick={()=>{navigate(-1)}} className="absolute top-[95px] left-5 text-gray-500 z-50 cursor-pointer hover:text-gray-700 transition-all duration-300 ease-in-out" sx={{borderRadius:"50%", height:"31px", width:"31px"}}></ArrowBackOutlinedIcon>
+      <ArrowBackOutlinedIcon onClick={()=>{navigate(-1)}} className="absolute lg:top-[95px] md:top-[85px] top-[71px] left-5 text-gray-500 z-50 cursor-pointer hover:text-gray-700 transition-all duration-300 ease-in-out" sx={{borderRadius:"50%", height:"31px", width:"31px"}}></ArrowBackOutlinedIcon>
 
       <hr className="w-full border-t-1 border-gray-200" />
       <div id="parent" className='fixed top-0 left-0  w-[76%] ml-[12%] py-3 text-center shadow-md z-50 invisible'></div>
 
-      <div className="flex justify-center items-center lg:mt-[110px] mt-5 md:mt-[50px]">
+      <div className="flex justify-center items-center lg:mt-[110px] mt-16 md:mt-[71px]">
             <div className="lg:w-[83%] md:w-[85%] w-[91%] flex md:flex-col lg:flex-row flex-col">
               <div className='flex lg:flex-col flex-col md:flex-col lg:w-1/2'>
                 <div
@@ -141,7 +141,8 @@ function Description() {
                 </button>
               </div>
 
-              <button onClick={addToCart} className="bg-black text-white lg:px-5 w-[150px] md:px-4 py-[6.5px] hover:bg-[#c27e94] hover:text-black transition">
+              <button onClick={()=>{if (window.confirm(`'${product.name}' will be added to the cart!`)) {addToCart()}}}
+            className="bg-black text-white lg:px-5 w-[150px] md:px-4 py-[6.5px] hover:bg-[#c27e94] hover:text-black transition">
               ADD TO CART
                       </button>
                 </div>

@@ -50,28 +50,32 @@ function Header() {
   }, []);
 
   const handleRemoveItem = (index) => {
-    const itemName = cartItems[index]?.name || "Item"; // Get the item name dynamically
     const updatedCart = [...cartItems];
     updatedCart.splice(index, 1); // Remove the item at the given index
     setCartItems(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart)); // Update local storage
-    
-    // Show success message
-  const parentElement = document.getElementById("parent");
-  if (parentElement) {
-    parentElement.textContent = `${itemName} Removed Successfully!`;
-    parentElement.style.backgroundColor = "#D8E3C6";
-    parentElement.style.color = "#3d1c25";
-    parentElement.style.visibility = "visible";
-    parentElement.style.display = "block";
-setTimeout(() => {
-  parentElement.style.display = "none";
-}, 1500);
-
-  }
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    setTimeout(() => window.dispatchEvent(new Event("cartUpdated")), 0);
 
     // Dispatch custom event to trigger cart update
     window.dispatchEvent(new Event("cartUpdated"));
+
+    const parentElement = document.getElementById("parent");
+    if (parentElement) {
+        parentElement.innerHTML = `${index.name} Removed Successfully!`;
+        parentElement.style.backgroundColor = "#D8E3C6";
+        parentElement.style.color = "#3d1c25"
+        parentElement.style.visibility = "visible";
+        parentElement.style.opacity = "1";
+        parentElement.style.transition = "opacity 0.5s ease-in-out";
+
+        setTimeout(() => {
+            parentElement.style.opacity = "0"; // Fade out effect
+            setTimeout(() => {
+                parentElement.style.visibility = "hidden"; // Hide the element
+                parentElement.style.backgroundColor = ""; // Reset background
+            }, 300); // Wait for fade-out transition before hiding
+        }, 1500); // Display for 3 sec
+    }
   };
   
 
@@ -133,7 +137,7 @@ setTimeout(() => {
 
 <div className='overflow-y-scroll h-[63%]'>
       {cartItems.map((item, index) => (
-  <div key={index} className="h-28 border-t-[1px] pt-[15px]">
+  <div key={item.id} className="h-28 border-t-[1px] pt-[15px]">
     <div className="px-5">
 
       <div className="flex items-center space-x-4">
@@ -141,15 +145,14 @@ setTimeout(() => {
         <img
           src={item.innerimage1}
           alt="Product"
-          onClick={() => navigate(`/description/${item.id}`)}
-          className="w-[71px] h-[71px] object-cover border cursor-pointer"
+          className="w-[71px] h-[71px] object-cover border"
         />
 
         {/* Product Name and Price */}
         <div className='flex justify-between w-full'>
-        <div>
+        <div className='w-full'>
         <div className="flex flex-col text-left">
-          <span className="text-sm font-medium tracking-widest w-[85%] cursor-pointer" onClick={() => navigate(`/description/${item.id}`)}>{item.name}</span>
+          <span className="text-sm font-medium tracking-widest w-[91%]">{item.name}</span>
           <span className="text-sm text-gray-700 mt-[7px] tracking-wider flex">
                 {item.quantity} 
                   <p className='mx-[7px] my-auto' style={{height:"28px"}}>&times;</p> 
@@ -161,11 +164,14 @@ setTimeout(() => {
         {/* Cross (Remove) Button */}
         <div>
         <button
-          onClick={() => handleRemoveItem(index)}
-          className="text-gray-400 border rounded-full border-gray-400 hover:text-gray-500 hover:border-gray-500 h-6 w-6 flex items-center justify-center">
-          <Trash2 size={13} />        
-          </button>
+              onClick={() => { if (window.confirm(`"${item.name}" will be removed from cart!`)) { handleRemoveItem(index); } }}
+              className="text-gray-400 border rounded-full border-gray-400 hover:text-gray-500 hover:border-gray-500 h-6 w-6 flex items-center justify-center"
+            >
+              <Trash2 size={13} />
+            </button>
+
         </div>
+
         </div>
       </div>
       </div>
@@ -183,7 +189,8 @@ setTimeout(() => {
       <button
       onClick={() => {
         setCartVisible(false); // Close the cart
-        navigate("/cart"); // Navigate after closing
+        navigate("/cart");
+        window.scrollTo(0, 0) // Navigate after closing
       }} 
        className="w-[100%] bg-black text-white py-3 px-5 font-medium mb-2 hover:bg-gray-800 transition-colors">
         VIEW CART
@@ -200,8 +207,8 @@ setTimeout(() => {
 
 
         <Toolbar className='h-81 flex justify-between bg-white'>
-        <Typography variant='h6' className='w-104 h-81 flex justify-between'>
-          <strong>GLOW VIBE</strong>
+        <Typography variant='h6' className='w-104 h-81 flex justify-between cursor-pointer'>
+          <strong onClick={()=>navigate(`/`)}>GLOW VIBE</strong>
         </Typography>
 
         {/* Desktop Menu */}
@@ -223,7 +230,7 @@ setTimeout(() => {
 
           {/* Account Icon */}
           <IconButton onClick={() => navigate("/login")} className="lg:block hidden">
-            <AccountCircleIcon className="lg:text-[#1f1d1f] md:text-[#C8A2C8] text-[#C8A2C8]" />
+            <AccountCircleIcon className="lg:text-[#1f1d1f] hover:md:text-[#C8A2C8] md:text-gray-700 text-gray-700" />
           </IconButton>
 
           <span className="hidden lg:block text-black font-bold mr-1 ml-1">${totalPrice.toFixed(2)}</span>
@@ -246,12 +253,12 @@ setTimeout(() => {
               }}
               overlap="circular"
             >       
-           <ShopTwoRoundedIcon className="lg:text-[#1f1d1f] md:text-[#C8A2C8] text-[#C8A2C8]" sx={{width:"21px", height:"21px"}} />
+           <ShopTwoRoundedIcon className="lg:text-[#1f1d1f] hover:md:text-[#C8A2C8] md:text-gray-700 text-gray-700" sx={{width:"21px", height:"21px"}} />
             </Badge>
           </IconButton>
 
           <IconButton className="lg:hidden" onClick={toggleDrawer(true)} sx={{ display: isMobile ? 'flex' : 'none' }}>
-            <MenuIcon className="text-[#C8A2C8]" />
+            <MenuIcon className="text-gray-700 hover:text-[#C8A2C8]" />
           </IconButton>
         </div>
       </Toolbar>
