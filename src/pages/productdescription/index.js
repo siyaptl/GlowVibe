@@ -9,6 +9,8 @@ import Footer from '../../components/cmpfooter';
 import { beautyProductsrow } from '../../config/staticdata';
 import krudes from '../../assets/krupdes.jpg';
 import Bgcontent from '../../components/cmpbgcontent';
+import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 function Description() {
   
@@ -17,6 +19,8 @@ function Description() {
   const { id } = useParams();
   const product = beautyProductsrow.find((item) => item.id.toString() === id);
   const [selectedimg, setSelectedimg] = useState(product.innerimage1)
+       const navigate = useNavigate(); // Initialize navigate
+
 
   const addToCart = () => {
     let cartItems = JSON.parse(localStorage.getItem("cart")) || []; 
@@ -34,7 +38,7 @@ function Description() {
     const parentElement = document.getElementById("parent");
     if (parentElement) {
         parentElement.innerHTML = `${product.name} Added Successfully!`;
-        parentElement.style.backgroundColor = "#e2aebc";
+        parentElement.style.backgroundColor = "#D8E3C6";
         parentElement.style.color = "#3d1c25"
         parentElement.style.visibility = "visible";
         parentElement.style.opacity = "1";
@@ -76,6 +80,8 @@ function Description() {
   return (
     <>
       <Header />
+      <ArrowBackOutlinedIcon onClick={()=>{navigate(-1)}} className="absolute top-[95px] left-5 text-gray-500 z-50 cursor-pointer hover:text-gray-700 transition-all duration-300 ease-in-out" sx={{borderRadius:"50%", height:"31px", width:"31px"}}></ArrowBackOutlinedIcon>
+
       <hr className="w-full border-t-1 border-gray-200" />
       <div id="parent" className='fixed top-0 left-0  w-[76%] ml-[12%] py-3 text-center shadow-md z-50 invisible'></div>
 

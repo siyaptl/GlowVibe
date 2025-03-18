@@ -46,7 +46,7 @@ function Productcard({ id, name, price, discountPrice, innerimage1 }) {
     // Show message feedback
     const parentElement = document.getElementById("parent");
     parentElement.innerHTML = `${name} Added Successfully!`;
-    parentElement.style.backgroundColor = "#e2aebc";
+    parentElement.style.backgroundColor = "#D8E3C6";
     parentElement.style.color = "#3d1c25";
     parentElement.style.visibility = "visible";
     parentElement.style.opacity = "1";

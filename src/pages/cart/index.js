@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../../components/cmpheader'
+import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { Trash2 } from 'lucide-react';
 
 function Cart() {
      const [cart, setCart] = useState([]);
+     const navigate = useNavigate(); // Initialize navigate
 
      useEffect(() => {
     const storedCart = localStorage.getItem("cart");
@@ -26,7 +30,8 @@ function Cart() {
     const updatedCart = [...cart];
     if (updatedCart[index].quantity + delta > 0) {
       updatedCart[index].quantity += delta;
-      updateCart(updatedCart);
+      setCart(updatedCart);
+      // updateCart(updatedCart);
     }
   };  
 
@@ -38,7 +43,7 @@ function Cart() {
     const parentElement = document.getElementById("parent");
     if (parentElement) {
       parentElement.textContent = `${itemName} Removed Successfully!`;
-      parentElement.style.backgroundColor = "#e2aebc";
+      parentElement.style.backgroundColor = "#D8E3C6";
       parentElement.style.color = "#3d1c25";
       parentElement.style.visibility = "visible";
       setTimeout(() => {
@@ -50,13 +55,13 @@ function Cart() {
   const calculateTotalPrice = (cartItems) => {
     return cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 };
-// console.log(localStorage.getItem("totalPrice"));
-
 
       return (
     <div>
       <Header />
       <hr></hr>
+      <ArrowBackOutlinedIcon onClick={()=>{navigate(-1)}} className="absolute top-[95px] left-5 text-gray-500 z-50 cursor-pointer hover:text-gray-700 transition-all duration-300 ease-in-out" sx={{borderRadius:"50%", height:"31px", width:"31px"}}></ArrowBackOutlinedIcon>
+
       <p id="parent" className='fixed top-0 left-0 w-[76%] ml-[12%] py-3 text-center shadow-md z-50 invisible'> </p>
 
     {/* large screen */}
@@ -64,7 +69,7 @@ function Cart() {
         <div className="text-center mt-10 text-gray-500 text-2xl">
           Your cart is empty.
         </div>
-      ) : (<div className="container w-[87%] mx-auto p-4 mt-11 lg:block md:hidden hidden">
+      ) : (<div className="container w-[87%] mx-auto p-4 mt-20 lg:block md:hidden hidden">
             <p className="text-4xl tracking-wide font-serif text-gray-800 mb-5">Cart</p>
 
       {/* Cart Table */}
@@ -86,18 +91,19 @@ function Cart() {
             <tr key={index} className="h-28  border-[1px]">        
               <td className="p-3">
               <button onClick={() => handleRemoveItem(index)} className="text-gray-400 border rounded-full border-gray-400 hover:text-gray-500 hover:border-gray-500 ml-7 h-7 w-7 text-2xl flex items-center justify-center">
-                    &times;
+                <Trash2 size={13} />
                   </button>
               </td>
               <td className="p-3 flex items-center">
                 <img
                   src={item.innerimage1}
                   alt="Product"
-                  className="w-16 h-20 object-cover border rounded"
+                  onClick={() => navigate(`/description/${item.id}`)}
+                  className="w-16 h-20 object-cover border rounded cursor-pointer"
                 />
                 </td>
                 <td className='text-center'>
-                 <span className="py-3 mx-auto tracking-wider">{item.name}</span>
+                 <span className="py-3 mx-auto tracking-wider cursor-pointer" onClick={() => navigate(`/description/${item.id}`)}>{item.name}</span>
                                   </td>
 
               <td className="p-3 text-gray-500 tracking-wider">${item.price.toFixed(2)}</td>
@@ -140,7 +146,7 @@ function Cart() {
           />
           <button className="bg-black text-white text-sm w-[45%] px-4 py-3">APPLY COUPON</button>
         </div>
-        <button className="bg-gray-500 text-white text-sm px-6 py-2 rounded">
+        <button className="bg-gray-700 text-white hover:bg-gray-900 text-sm px-6 py-2 rounded">
           UPDATE CART
         </button>
       </div>)}

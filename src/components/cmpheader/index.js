@@ -6,6 +6,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Link, useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import ShopTwoRoundedIcon from '@mui/icons-material/ShopTwoRounded';
+import { ShoppingCart, Trash2 } from 'lucide-react';
 
 function Header() {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -16,6 +17,7 @@ function Header() {
   const [selectedItem, setSelectedItem] = useState(location.pathname);
   const [cartItemCount, setCartItemCount] = useState(3); 
   const [totalPrice, setTotalCartPrice] = useState(0); 
+  const [cartItems, setCartItems] = useState([]); 
 
   useEffect(() => {
     const handleCartUpdate = () => {
@@ -24,6 +26,7 @@ function Header() {
       setCartItemCount(totalQuantity);
       const totalPrice = cartItems.reduce((total, item) => total + (item.quantity || 1) * item.price, 0);
       setTotalCartPrice(totalPrice); // Assuming you have a state to store total price
+      setCartItems(cartItems)
     };
     
     // Fetch the cart count when the component mounts
@@ -45,6 +48,32 @@ function Header() {
       window.removeEventListener("storage", handleStorageChange);
     };
   }, []);
+
+  const handleRemoveItem = (index) => {
+    const itemName = cartItems[index]?.name || "Item"; // Get the item name dynamically
+    const updatedCart = [...cartItems];
+    updatedCart.splice(index, 1); // Remove the item at the given index
+    setCartItems(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart)); // Update local storage
+    
+    // Show success message
+  const parentElement = document.getElementById("parent");
+  if (parentElement) {
+    parentElement.textContent = `${itemName} Removed Successfully!`;
+    parentElement.style.backgroundColor = "#D8E3C6";
+    parentElement.style.color = "#3d1c25";
+    parentElement.style.visibility = "visible";
+    parentElement.style.display = "block";
+setTimeout(() => {
+  parentElement.style.display = "none";
+}, 1500);
+
+  }
+
+    // Dispatch custom event to trigger cart update
+    window.dispatchEvent(new Event("cartUpdated"));
+  };
+  
 
   const toggleDrawer = (open) => () => {
     setDrawerOpen(open);
@@ -90,8 +119,10 @@ function Header() {
     {/* Cart Section */}
     <div id="cartparent" className='fixed top-0 bg-white h-[100%] right-0 lg:w-[25%] md:w-[41%] w-[81%] py-3 text-center shadow-md z-50'>
             <div className='flex justify-between px-5 py-[3px]'>
-              <p className='tracking-wider text-xl'>Shopping Cart</p>
-              <button 
+            <p className="tracking-wider text-xl flex items-center gap-2">
+              <ShoppingCart size={23} className='mr-1'/>
+              Shopping Cart
+            </p>              <button 
                 className="text-3xl text-gray-500 hover:text-gray-700"
                 onClick={() => setCartVisible(false)}
               >
@@ -100,13 +131,61 @@ function Header() {
             </div>
       <hr></hr>
 
+<div className='overflow-y-scroll h-[63%]'>
+      {cartItems.map((item, index) => (
+  <div key={index} className="h-28 border-t-[1px] pt-[15px]">
+    <div className="px-5">
+
+      <div className="flex items-center space-x-4">
+        {/* Product Image */}
+        <img
+          src={item.innerimage1}
+          alt="Product"
+          onClick={() => navigate(`/description/${item.id}`)}
+          className="w-[71px] h-[71px] object-cover border cursor-pointer"
+        />
+
+        {/* Product Name and Price */}
+        <div className='flex justify-between w-full'>
+        <div>
+        <div className="flex flex-col text-left">
+          <span className="text-sm font-medium tracking-widest w-[85%] cursor-pointer" onClick={() => navigate(`/description/${item.id}`)}>{item.name}</span>
+          <span className="text-sm text-gray-700 mt-[7px] tracking-wider flex">
+                {item.quantity} 
+                  <p className='mx-[7px] my-auto' style={{height:"28px"}}>&times;</p> 
+                ${item.price}
+              </span>
+              </div>
+              </div>
+
+        {/* Cross (Remove) Button */}
+        <div>
+        <button
+          onClick={() => handleRemoveItem(index)}
+          className="text-gray-400 border rounded-full border-gray-400 hover:text-gray-500 hover:border-gray-500 h-6 w-6 flex items-center justify-center">
+          <Trash2 size={13} />        
+          </button>
+        </div>
+        </div>
+      </div>
+      </div>
+  </div>
+))}
+
+
+      {/* footer */}
       <div className="border-t border-gray-200 p-4 w-[100%] px-5 absolute bottom-0">
           <div className="flex justify-between items-center mb-4">
             <span className="text-base font-medium text-gray-900">Subtotal:</span>
             <span className="text-base font-medium text-gray-900">${totalPrice.toFixed(2)}</span>
           </div>
 
-      <button onClick={() => navigate("/cart")} className="w-[100%] bg-black text-white py-3 px-5 font-medium mb-2 hover:bg-gray-800 transition-colors">
+      <button
+      onClick={() => {
+        setCartVisible(false); // Close the cart
+        navigate("/cart"); // Navigate after closing
+      }} 
+       className="w-[100%] bg-black text-white py-3 px-5 font-medium mb-2 hover:bg-gray-800 transition-colors">
         VIEW CART
       </button>
 
@@ -114,6 +193,7 @@ function Header() {
         CHECKOUT
       </button>
   </div>
+    </div>
     </div>
   </>
 )}
@@ -146,7 +226,7 @@ function Header() {
             <AccountCircleIcon className="lg:text-[#1f1d1f] md:text-[#C8A2C8] text-[#C8A2C8]" />
           </IconButton>
 
-          <span className="hidden lg:block text-black font-bold mr-1 ml-1">$0.00</span>
+          <span className="hidden lg:block text-black font-bold mr-1 ml-1">${totalPrice.toFixed(2)}</span>
           
           <IconButton onClick={cartSection} className="lg:block hidden">
           <Badge 
