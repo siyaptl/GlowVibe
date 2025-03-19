@@ -1,7 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const getCartFromLocalStorage = () => {
+  try {
+    const cartData = localStorage.getItem("cart");
+    return cartData ? JSON.parse(cartData) : [];
+  } catch (error) {
+    console.error("Error parsing cart data from localStorage:", error);
+    localStorage.removeItem("cart"); // Remove corrupt data
+    return []; // Return an empty array to prevent crashes
+  }
+};
+
 const initialState = {
-  cart: JSON.parse(localStorage.getItem("cart")) || [],
+  cart: getCartFromLocalStorage(),
 };
 
 const cartSlice = createSlice({

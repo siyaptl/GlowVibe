@@ -3,6 +3,7 @@ import Header from '../../components/cmpheader'
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { Trash2 } from 'lucide-react';
+import Footer from '../../components/cmpfooter';
 
 function Cart() {
      const [cart, setCart] = useState([]);
@@ -34,46 +35,47 @@ function Cart() {
     }
   };  
 
-  const handleRemoveItem = (index,item) => {
-    const updatedCart = cart.filter((_, i) => i !== index);
-    setCart(updatedCart)
-    if(window.confirm(`'${item.name}' will be removed from the cart!`)){
-      localStorage.setItem("cart", JSON.stringify(updatedCart));
+  const handleRemoveItem = (index, item) => {
+    if (window.confirm(`'${item.name}' will be removed from the cart!`)) {
+        const updatedCart = cart.filter((_, i) => i !== index);
+        setCart(updatedCart);
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
 
-      const total = calculateTotalPrice(updatedCart);  // Ensure total is calculated
-      localStorage.setItem("totalPrice", total.toFixed(2)); 
+        const total = calculateTotalPrice(updatedCart); // Ensure total is calculated
+        localStorage.setItem("totalPrice", total.toFixed(2)); 
 
-      window.dispatchEvent(new Event("cartUpdated"));
-    }
+        window.dispatchEvent(new Event("cartUpdated"));
 
-    const parentElement = document.getElementById("parent");
-    if (parentElement) {
-        parentElement.innerHTML = `${item.name} Removed Successfully!`;
-        parentElement.style.backgroundColor = "#D8E3C6";
-        parentElement.style.color = "#3d1c25"
-        parentElement.style.visibility = "visible";
-        parentElement.style.opacity = "1";
-        parentElement.style.transition = "opacity 0.5s ease-in-out";
+        const parentElement = document.getElementById("parent");
+        if (parentElement) {
+            parentElement.innerHTML = `${item.name} Removed Successfully!`;
+            parentElement.style.backgroundColor = "#D8E3C6";
+            parentElement.style.color = "#3d1c25";
+            parentElement.style.visibility = "visible";
+            parentElement.style.opacity = "1";
+            parentElement.style.transition = "opacity 0.5s ease-in-out";
 
-        setTimeout(() => {
-            parentElement.style.opacity = "0"; // Fade out effect
             setTimeout(() => {
-                parentElement.style.visibility = "hidden"; // Hide the element
-                parentElement.style.backgroundColor = ""; // Reset background
-            }, 300); // Wait for fade-out transition before hiding
-        }, 1500); // Display for 3 sec
+                parentElement.style.opacity = "0"; // Fade out effect
+                setTimeout(() => {
+                    parentElement.style.visibility = "hidden"; // Hide the element
+                    parentElement.style.backgroundColor = ""; // Reset background
+                }, 300); // Wait for fade-out transition before hiding
+            }, 1500); // Display for 1.5 sec
+        }
     }
-      };
+};
+
 
   const calculateTotalPrice = (cartItems) => {
     return cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 };
 
       return (
-    <div>
+    <div style={{overflowY:'scroll'}}>
       <Header />
       <hr></hr>
-      <ArrowBackOutlinedIcon onClick={()=>{navigate(-1)}} className="absolute lg:top-[95px] lg:left-5 md:top-[81px] md:left-7 top-[73px] left-3 text-gray-500 z-50 cursor-pointer hover:text-gray-700 transition-all duration-300 ease-in-out" sx={{borderRadius:"50%", height:"31px", width:"31px"}}></ArrowBackOutlinedIcon>
+      <ArrowBackOutlinedIcon onClick={()=>{navigate(-1)}} className="absolute md:top-[81px] md:left-5 top-[73px] left-3 text-gray-500 z-50 cursor-pointer hover:text-gray-700 transition-all duration-300 ease-in-out lg:top-[95px] lg:left-5" sx={{borderRadius:"50%", height:"31px", width:"31px"}}></ArrowBackOutlinedIcon>
 
       <p id="parent" className='fixed top-0 left-0 w-[76%] ml-[12%] py-3 text-center shadow-md z-50 invisible'> </p>
 
@@ -150,25 +152,67 @@ function Cart() {
         <div className="text-center mt-10 text-gray-500 text-2xl">
           Your cart is empty.
         </div>
-      ) : (<div className="flex flex-col lg:flex-row justify-between p-3 space-y-3 lg:space-y-0 border">
+      ) : (<div className="hidden md:hidden lg:flex flex-col lg:flex-row justify-between p-3 space-y-3 lg:space-y-0 border border-t-0">
         <div className="flex justify-between overflow-hidden w-full lg:w-1/3">
           <input
             type="text"
             placeholder="Coupon code"
             className="w-[51%] p-2 border outline-none"
           />
-          <button className="bg-black text-white text-sm w-[45%] px-4 py-3">APPLY COUPON</button>
+          <button className="bg-gray-500 hover:bg-gray-700 text-white text-sm w-[45%] px-4 py-3">APPLY COUPON</button>
         </div>
         <button onClick={() => {
     if (window.confirm("Do you want to update the cart?")) {
       updateCart(cart);
     }
-  }}  className="bg-gray-700 text-white hover:bg-gray-900 text-sm px-6 py-2 rounded">
-          UPDATE CART
+  }}  className="bg-gray-500 tracking-wider text-white hover:bg-gray-700 text-sm px-6 py-2 rounded">
+          UPDATE CART QUANTITY QUANTITY
         </button>
       </div>)}
     </div>
 )}
+
+{/* below section large screen */}
+<div className='w-[85%] mx-auto overflow-x-auto md:hidden hidden lg:flex mb-11 lg:p-[5px]'>
+<div className="border border-gray-300 w-full ml-auto md:w-[53%] shadow-sm lg:w-[47%] lg:mt-3 ">
+      <h2 className="text-xl bg-gray-50 tracking-wider py-5 font-semibold pb-3 px-5">Cart totals</h2>
+      <hr></hr>
+
+      {/* Subtotal Row */}
+<div className="w-full py-[15px] px-5 flex items-center">
+  <span className="text-gray-700 text-lg tracking-wider w-20">Subtotal</span>  
+
+  <div className="flex-1 text-center">
+    <span className="font-medium tracking-wide text-gray-700">
+      ${calculateTotalPrice(cart).toFixed(2)}
+    </span>
+  </div>
+</div>
+<hr className='mx-5'></hr>
+
+
+{/* Total Row */}
+<div className="w-full py-[15px] px-5 flex items-center">
+  <span className="text-gray-700 text-lg tracking-wider w-20">Total</span>
+  <div className="flex-1 text-center">
+    <span className="font-medium tracking-wide text-gray-700">
+      ${calculateTotalPrice(cart).toFixed(2)}
+    </span>
+  </div>
+</div>
+<hr className='mx-5'></hr>
+
+      {/* Checkout Button */}
+      <div className="flex justify-center">
+      <button 
+        className="w-[83%] mx-auto my-5 rounded-sm bg-gray-700 text-white py-5 text-center text-[17px] tracking-wider uppercase hover:bg-[#c27e94] hover:text-black transition-colors"
+        onClick={() => alert("Proceeding to checkout!")} // Replace with navigate("/checkout") if using React Router
+      >
+        PROCEED TO CHECKOUT
+      </button>
+    </div>
+    </div>
+    </div>
 
     {/* medu=ium and small screen */}
     {cart.length === 0 ? ("") :(
@@ -221,14 +265,14 @@ function Cart() {
       )}
 
       {/* Coupon and Update Section medium screen */}
-      <div className="md:flex hidden flex-row lg:flex-row border-x-[1px] border-b-[1px] py-3 px-3 justify-between">
-  <div className="flex">
+      <div className="container w-[100%] mx-auto py-3 lg:hidden md:flex md:flex-row md:justify-between hidden flex-col mt- mb-5">
+      <div className="flex">
     <input
       type="text"
       placeholder="Coupon code"
       className="w-auto pl-1 border-[1px] outline-none"
     />
-    <button className="bg-black text-white px-5 py-[11px] ml-1">APPLY COUPON</button>
+    <button className="bg-gray-500 hover:bg-gray-700 text-white px-5 py-[11px] ml-1">APPLY COUPON</button>
   </div>
   <button 
   onClick={() => {
@@ -236,8 +280,8 @@ function Cart() {
       updateCart(cart);
     }
   }} 
-  className="bg-gray-700 text-white hover:bg-gray-900 px-6">
-    UPDATE CART
+  className="bg-gray-500 tracking-wider text-white hover:bg-gray-700 px-6">
+    UPDATE CART QUANTITY
   </button>
 </div>
 
@@ -251,18 +295,100 @@ function Cart() {
             placeholder="Coupon code"
             className="p-2 border outline-none w-[49%]"
           />
-          <button className="bg-black text-white px-4 text-base w-[49%]">APPLY COUPON</button>
+          <button className="bg-gray-500 hover:bg-gray-700 text-white px-4 text-sm w-[49%]">APPLY COUPON</button>
         </div>
         <button onClick={() => {
     if (window.confirm("Do you want to update the cart?")) {
       updateCart(cart);
     }
-  }}  className="bg-gray-700 text-white hover:bg-gray-900 px-6 py-2 w-[99%]">
-          UPDATE CART
+  }}  className="bg-gray-500 tracking-wider text-sm text-white hover:bg-gray-900 px-6 py-2 w-[99%]">
+          UPDATE CART QUANTITY
         </button>
       </div>
     </div>)}
+
+
+    {/* below section medium and small screen */}
+    {cart.length === 0 ? ("") :
+    (<div className='w-full md:flex lg:hidden hidden mb-11 my-5'>
+<div className="border border-gray-300 mx-auto w-full ml-auto md:w-[53%] lg:mt-3 shadow-sm  lg:w-[47%]">
+      <h2 className="text-xl bg-gray-50 tracking-wider py-5 font-semibold pb-3 px-5">Cart totals</h2>
+      <hr></hr>
+
+      {/* Subtotal Row */}
+<div className="w-full py-[15px] px-5 flex items-center justify-between">
+  <span className="text-gray-700 text-lg tracking-wider w-20">Subtotal</span>  
+
+    <span className="font-medium tracking-wide text-gray-700">
+      ${calculateTotalPrice(cart).toFixed(2)}
+    </span>
+</div>
+<hr className='mx-5'></hr>
+
+
+{/* Total Row */}
+<div className="w-full py-[15px] px-5 flex items-center justify-between">
+  <span className="text-gray-700 text-lg tracking-wider w-20">Total</span>
+    <span className="font-medium tracking-wide text-gray-700">
+      ${calculateTotalPrice(cart).toFixed(2)}
+    </span>
+</div>
+<hr className='mx-5'></hr>
+
+      {/* Checkout Button */}
+      <div className="flex justify-center">
+      <button 
+        className="w-[83%] mx-auto my-5 rounded-sm bg-gray-700 text-white py-5 text-center text-[17px] tracking-wider uppercase hover:bg-[#c27e94] hover:text-black transition-colors"
+        onClick={() => alert("Proceeding to checkout!")} // Replace with navigate("/checkout") if using React Router
+      >
+        PROCEED TO CHECKOUT
+      </button>
     </div>
+    </div>
+    </div>)}
+
+    {/* small */}
+    {cart.length === 0 ? ("") :
+    (<div className='w-full md:hidden lg:hidden flex mb-11 px-5 my-7'>
+<div className="border border-gray-300 mx-auto w-full ml-auto md:w-[53%] lg:mt-3 shadow-sm  lg:w-[47%]">
+      <h2 className="text-xl bg-gray-50 tracking-wider py-5 font-semibold pb-3 px-5">Cart totals</h2>
+      <hr></hr>
+
+      {/* Subtotal Row */}
+<div className="w-full py-[15px] px-5 flex items-center justify-between">
+  <span className="text-gray-700 text-lg tracking-wider w-20">Subtotal</span>  
+
+    <span className="font-medium tracking-wide text-gray-700">
+      ${calculateTotalPrice(cart).toFixed(2)}
+    </span>
+</div>
+<hr className='mx-5'></hr>
+
+
+{/* Total Row */}
+<div className="w-full py-[15px] px-5 flex items-center justify-between">
+  <span className="text-gray-700 text-lg tracking-wider w-20">Total</span>
+    <span className="font-medium tracking-wide text-gray-700">
+      ${calculateTotalPrice(cart).toFixed(2)}
+    </span>
+</div>
+<hr className='mx-5'></hr>
+
+      {/* Checkout Button */}
+      <div className="flex justify-center">
+      <button 
+        className="w-[83%] mx-auto my-5 rounded-sm bg-gray-700 text-white py-3 text-center text-[15.5px] tracking-wider uppercase hover:bg-[#c27e94] hover:text-black transition-colors"
+        onClick={() => alert("Proceeding to checkout!")} // Replace with navigate("/checkout") if using React Router
+      >
+        PROCEED TO CHECKOUT
+      </button>
+    </div>
+    </div>
+    </div>)}
+    <Footer />
+    </div>
+
+
   )
 }
 

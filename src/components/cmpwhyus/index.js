@@ -24,7 +24,7 @@ function Whyus() {
       ];
   return (
     <>
-      <div className='bg-white lg:pt-24 md:pt-20 lg:pb-24 md:pb-20 pb-10 lg:flex'>
+      <div className='bg-white md:pt-20 md:pb-20 pb-10 lg:flex lg:pb-24  lg:pt-24'>
                 <div>
                    <p style={{ 
                                   color: '#4B5563',  // Equivalent to Tailwind's text-gray-600
@@ -38,7 +38,7 @@ function Whyus() {
                    <hr className="w-14 border-t-1 border-gray-400 my-4 md:mx-auto mx-auto lg:ml-24" />
                    </div>
 
-                   <span className="lg:flex block items-center lg:space-x-10 md:space-x-3 lg:ml-44 lg:mt-0 mt-10 md:flex md:justify-center md:mx-7 md:mt-7">
+                   <span className=" block items-center md:space-x-3 mt-10 md:flex md:justify-center md:mx-7 md:mt-7 lg:flex  lg:ml-[141px] lg:mt-0  lg:space-x-10 lg:mr-44">
                             {features.map((feature, index) => (
                                 <div 
                                 key={index} 
@@ -48,10 +48,10 @@ function Whyus() {
                                     {feature.icon}
                                 </div>
                                 <div className="text-center md:text-left lg:text-left">
-                                    <h3 className="lg:text-[19px] md:text-[16px] text-[19px] mt-3 text-gray-800 leading-relaxed tracking-wider">
+                                    <h3 className="md:text-[16px] text-[19px] mt-3 text-gray-800 leading-relaxed tracking-widerlg:text-[19px] ">
                                     {feature.title}
                                     </h3>
-                                    <p className="text-gray-600 lg:text-[15px] md:text-[15px] mb-5 font-light leading-[25px] mt-1 tracking-wider">
+                                    <p className="text-gray-600 md:text-[15px] mb-5 font-light leading-[25px] mt-1 tracking-wider lg:text-[15px]">
                                     {feature.description}
                                     </p>
                                 </div>

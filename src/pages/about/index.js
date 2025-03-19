@@ -75,7 +75,7 @@ function About() {
         <img
           src={me} // Replace with actual image path
           alt="Siya"
-          className="lg:w-[95%] md:h-[631px] lg:h-[100%] h-[400px] w-[100%] object-cover lg:object-left-top md:object-left-top lg:pt-0 md:pt-0 pt-5"
+          className="lg:w-[95%] md:h-[631px] lg:h-[100%] h-[510px] w-[100%] object-cover lg:object-left-top md:object-left-top lg:pt-0 md:pt-0 pt-5"
         />
       </div>
       
@@ -94,17 +94,16 @@ function About() {
         <p className="lg:text-2xl md:text-xl text-xl text-center px-[11px] text-gray-900 font-['Marcellus',serif]  md:pr-5 lg:tracking-wider md:tracking-wider tracking-wide lg:text-right md:text-right leading-7 lg:pl-32 md:pl-[21px] lg:px-0 md:px-0">
           I'm a 21-year-old woman entrepreneur, living in Gujarat, India
         </p>
-        <hr className="w-[61px] border-gray-400 my-5 lg:ml-[513px] md:ml-[281px] mx-auto" />
-        <p className="text-gray-600 leading-relaxed tracking-widest lg:text-base md:text-[15px] text-[14px] px-5 lg:ml-[-73px] md:ml-[27px] lg:pl-52">
+        <p className="text-gray-600 leading-relaxed tracking-widest md:text-[15px] text-[14px] md:px-0 px-5 mt-3 md:ml-[27px] md:mr-5 lg:pl-52 lg:text-base  lg:ml-[-73px] lg:mr-0">
           Sed ut fringilla dolor. Morbi suscipit a nunc eu finibus. Nam rutrum mattis velit eget volutpat. Fusce egestas mi urna, id pulvinar ipsum dictum eget. Mauris in dolor velit. Vestibulum finibus felis non massa commodo molestie at id justo. Quisque sollicitudin elit sit amet facilisis euismod. Fusce at arcu sed.
         </p>
-        <p className="text-gray-600 leading-relaxed tracking-widest lg:text-base md:text-[15px] text-[14px] px-5 lg:ml-[-73px] md:ml-[15px] mt-5 lg:pl-52">
+        <p className="text-gray-600 leading-relaxed tracking-widest lg:text-base md:text-[15px] text-[14px] md:px-0 px-5 lg:ml-[-73px] md:ml-[15px] md:mr-5 mt-5 lg:pl-52 lg:mr-0">
           Nam rutrum mattis velit eget volutpat. Fusce egestas mi urna, id pulvinar ipsum dictum eget.
         </p>
       </div>
     </div>
 
-   <div className='mt-5 md:mt-0 lg:mt-0'>                        
+   <div className='mt-5 md:mt-0 md:mx-11 mx-3 lg:mt-0 lg:mx-0'>                        
     <Whyus />
     </div>
     <Footer />

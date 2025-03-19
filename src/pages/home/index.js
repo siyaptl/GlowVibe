@@ -110,8 +110,9 @@ const Home = () => {
                 </div>
 
               <div className="w-[100%] bg-white grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 p-4">
-              {beautyProductsrow.map((product) => (
+              {beautyProductsrow.map((product,index) => (
                   product.id<=4&&(<Productcard
+                    key={product.id} // ✅ Add a unique key here
                     id={product.id}
                     name={product.name}
                     price={product.price}
@@ -131,8 +132,9 @@ const Home = () => {
                 <Maininfo infoupper="SHOP" infolower="Best Selling" />
               </div>
               <div className="w-[100%] bg-white grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 p-4 lg:pb-16">
-              {beautyProductsrow.map((product) => (
+              {beautyProductsrow.map((product,index) => (
                   product.id>=4&&product.id<=7&&(<Productcard
+                    key={product.id} // ✅ Add a unique key here
                     id={product.id}
                     name={product.name}
                     price={product.price}

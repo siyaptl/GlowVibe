@@ -6,7 +6,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Link, useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import ShopTwoRoundedIcon from '@mui/icons-material/ShopTwoRounded';
-import { ShoppingCart, Trash2 } from 'lucide-react';
+import { ShoppingCart } from 'lucide-react';
 
 function Header() {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -48,35 +48,6 @@ function Header() {
       window.removeEventListener("storage", handleStorageChange);
     };
   }, []);
-
-  const handleRemoveItem = (index) => {
-    const updatedCart = [...cartItems];
-    updatedCart.splice(index, 1); // Remove the item at the given index
-    setCartItems(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
-    setTimeout(() => window.dispatchEvent(new Event("cartUpdated")), 0);
-
-    // Dispatch custom event to trigger cart update
-    window.dispatchEvent(new Event("cartUpdated"));
-
-    const parentElement = document.getElementById("parent");
-    if (parentElement) {
-        parentElement.innerHTML = `${index.name} Removed Successfully!`;
-        parentElement.style.backgroundColor = "#D8E3C6";
-        parentElement.style.color = "#3d1c25"
-        parentElement.style.visibility = "visible";
-        parentElement.style.opacity = "1";
-        parentElement.style.transition = "opacity 0.5s ease-in-out";
-
-        setTimeout(() => {
-            parentElement.style.opacity = "0"; // Fade out effect
-            setTimeout(() => {
-                parentElement.style.visibility = "hidden"; // Hide the element
-                parentElement.style.backgroundColor = ""; // Reset background
-            }, 300); // Wait for fade-out transition before hiding
-        }, 1500); // Display for 3 sec
-    }
-  };
   
 
   const toggleDrawer = (open) => () => {
@@ -136,52 +107,58 @@ function Header() {
       <hr></hr>
 
 <div className='overflow-y-scroll h-[63%]'>
-      {cartItems.map((item, index) => (
-  <div key={item.id} className="h-28 border-t-[1px] pt-[15px]">
-    <div className="px-5">
-
-      <div className="flex items-center space-x-4">
-        {/* Product Image */}
-        <img
-          src={item.innerimage1}
-          alt="Product"
-          className="w-[71px] h-[71px] object-cover border"
-        />
-
-        {/* Product Name and Price */}
-        <div className='flex justify-between w-full'>
-        <div className='w-full'>
-        <div className="flex flex-col text-left">
-          <span className="text-sm font-medium tracking-widest w-[91%]">{item.name}</span>
-          <span className="text-sm text-gray-700 mt-[7px] tracking-wider flex">
-                {item.quantity} 
-                  <p className='mx-[7px] my-auto' style={{height:"28px"}}>&times;</p> 
-                ${item.price}
-              </span>
-              </div>
-              </div>
-
-        {/* Cross (Remove) Button */}
-        <div>
-        <button
-              onClick={() => { if (window.confirm(`"${item.name}" will be removed from cart!`)) { handleRemoveItem(index); } }}
-              className="text-gray-400 border rounded-full border-gray-400 hover:text-gray-500 hover:border-gray-500 h-6 w-6 flex items-center justify-center"
-            >
-              <Trash2 size={13} />
-            </button>
-
-        </div>
-
-        </div>
-      </div>
-      </div>
+{cartItems.length === 0 ? (
+  <div className="flex items-center justify-center h-64 text-gray-500 text-[23px] tracking-widest font-medium">
+    Your cart is empty
   </div>
-))}
+)   :( 
+  cartItems.map((item, index) => (
+    <div key={item.id} className="h-28 border-t-[1px] pt-[15px]">
+      <div className="px-5">
+        <div className="flex items-center space-x-4">
+          {/* Product Image */}
+          <img
+            src={item.innerimage1}
+            alt="Product"
+            className="w-[71px] h-[71px] object-cover border"
+          />
+
+          {/* Product Name and Price */}
+          <div className='flex justify-between w-full'>
+            <div className='w-full'>
+              <div className="flex flex-col text-left">
+                <span className="text-sm font-medium tracking-widest w-[91%]">{item.name}</span>
+                <span className="text-sm text-gray-700 mt-[7px] tracking-wider flex">
+                  {item.quantity} 
+                  <p className='mx-[7px] my-auto' style={{height:"28px"}}>&times;</p> 
+                  ${item.price}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  ))
+)}
 
 
       {/* footer */}
-      <div className="border-t border-gray-200 p-4 w-[100%] px-5 absolute bottom-0">
-          <div className="flex justify-between items-center mb-4">
+       
+        <div className="border-gray-200 p-4 w-[100%] px-5 absolute bottom-0">
+        {cartItems.length === 0 ?(
+          <button
+        onClick={() => {
+          setCartVisible(false);
+          navigate("/shopall"); // Navigate to shopall page
+        }} 
+        className="w-[100%] bg-black text-white border-t-0 py-3 px-7 my-3 font-medium hover:bg-[#c27e94] hover:text-black transition-colors"
+      >
+        CONTINUE TO SHOPPING
+      </button>
+        ):(
+          <>
+          <div className="flex justify-between items-center mb-4 border-t pt-5">
             <span className="text-base font-medium text-gray-900">Subtotal:</span>
             <span className="text-base font-medium text-gray-900">${totalPrice.toFixed(2)}</span>
           </div>
@@ -192,13 +169,15 @@ function Header() {
         navigate("/cart");
         window.scrollTo(0, 0) // Navigate after closing
       }} 
-       className="w-[100%] bg-black text-white py-3 px-5 font-medium mb-2 hover:bg-gray-800 transition-colors">
+       className="w-[100%] bg-gray-700 text-white py-3 px-5 font-medium mb-2 hover:bg-gray-800 transition-colors">
         VIEW CART
       </button>
 
-      <button  className="w-[100%] bg-black text-white py-3 px-5 font-medium hover:bg-gray-800 transition-colors">
+      <button  className="w-[100%] bg-gray-700 text-white py-3 px-5 font-medium hover:bg-gray-800 transition-colors">
         CHECKOUT
       </button>
+      </>
+        )}
   </div>
     </div>
     </div>
