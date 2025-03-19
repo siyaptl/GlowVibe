@@ -81,7 +81,7 @@ function Cart() {
 
     {/* large screen */}
     {cart.length === 0 ? (
-        <div className="text-center mt-10 text-gray-500 text-2xl">
+        <div className="text-center mt-[173px] mb-[311px] text-gray-500 text-2xl">
           Your cart is empty.
         </div>
       ) : (<div className="container w-[87%] mx-auto p-4 mt-2 lg:block md:hidden hidden">
@@ -149,7 +149,7 @@ function Cart() {
 
       {/* Coupon and Update Section */}
       {cart.length === 0 ? (
-        <div className="text-center mt-10 text-gray-500 text-2xl">
+        <div className="text-center mt-10 mb-11 text-gray-500 text-2xl">
           Your cart is empty.
         </div>
       ) : (<div className="hidden md:hidden lg:flex flex-col lg:flex-row justify-between p-3 space-y-3 lg:space-y-0 border border-t-0">
@@ -173,7 +173,8 @@ function Cart() {
 )}
 
 {/* below section large screen */}
-<div className='w-[85%] mx-auto overflow-x-auto md:hidden hidden lg:flex mb-11 lg:p-[5px]'>
+{cart.length === 0 ? ("") :
+(<div className='w-[85%] mx-auto overflow-x-auto md:hidden hidden lg:flex mb-11 lg:p-[5px]'>
 <div className="border border-gray-300 w-full ml-auto md:w-[53%] shadow-sm lg:w-[47%] lg:mt-3 ">
       <h2 className="text-xl bg-gray-50 tracking-wider py-5 font-semibold pb-3 px-5">Cart totals</h2>
       <hr></hr>
@@ -203,16 +204,17 @@ function Cart() {
 <hr className='mx-5'></hr>
 
       {/* Checkout Button */}
-      <div className="flex justify-center">
+      {cart.length === 0 ? ("") :
+      (<div className="flex justify-center">
       <button 
         className="w-[83%] mx-auto my-5 rounded-sm bg-gray-700 text-white py-5 text-center text-[17px] tracking-wider uppercase hover:bg-[#c27e94] hover:text-black transition-colors"
         onClick={() => alert("Proceeding to checkout!")} // Replace with navigate("/checkout") if using React Router
       >
         PROCEED TO CHECKOUT
       </button>
+    </div>)}
     </div>
-    </div>
-    </div>
+    </div>)}
 
     {/* medu=ium and small screen */}
     {cart.length === 0 ? ("") :(
@@ -336,14 +338,15 @@ function Cart() {
 <hr className='mx-5'></hr>
 
       {/* Checkout Button */}
-      <div className="flex justify-center">
+      {cart.length === 0 ? ("") :
+      (<div className="flex justify-center">
       <button 
         className="w-[83%] mx-auto my-5 rounded-sm bg-gray-700 text-white py-5 text-center text-[17px] tracking-wider uppercase hover:bg-[#c27e94] hover:text-black transition-colors"
         onClick={() => alert("Proceeding to checkout!")} // Replace with navigate("/checkout") if using React Router
       >
         PROCEED TO CHECKOUT
       </button>
-    </div>
+    </div>)}
     </div>
     </div>)}
 
@@ -375,6 +378,8 @@ function Cart() {
 <hr className='mx-5'></hr>
 
       {/* Checkout Button */}
+      {cart.length === 0 ? ("") : 
+      (
       <div className="flex justify-center">
       <button 
         className="w-[83%] mx-auto my-5 rounded-sm bg-gray-700 text-white py-3 text-center text-[15.5px] tracking-wider uppercase hover:bg-[#c27e94] hover:text-black transition-colors"
@@ -382,7 +387,7 @@ function Cart() {
       >
         PROCEED TO CHECKOUT
       </button>
-    </div>
+    </div>)}
     </div>
     </div>)}
     <Footer />
