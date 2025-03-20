@@ -186,18 +186,18 @@ function Header() {
 
 
         <Toolbar className='h-81 flex justify-between bg-white'>
-        <Typography variant='h6' className='w-104 h-81 flex justify-between cursor-pointer'>
+        <Typography variant='h6' className='lg:w-[21%] md:w-[21%] w-[45%] h-81 flex justify-between cursor-pointer'>
           <strong onClick={()=>navigate(`/`)}>GLOW VIBE</strong>
         </Typography>
 
         {/* Desktop Menu */}
-        <div className='w-575.16 h-81 justify-center mx-auto text-[15px] lg:flex hidden'>
+        <div className='w-[51%] h-81 justify-center mx-auto text-[15px] lg:flex hidden'>
           {menuItems.map((item) => (
             <Button
               key={item.text}
               onClick={() => navigate(item.path)}
               className='h-[80px] font-normal hover:bg-slate-50 hover:text-[#D999A0]'
-              style={{ padding: "15px", color: "#000000" }}
+              style={{ padding: "1px", color: "#000000" }}
             >
               {item.text}
             </Button>
@@ -205,40 +205,36 @@ function Header() {
         </div>
 
         {/* Cart Price, Account Icon & Mobile Menu Icon */}
-        <div className='flex justify-end items-center'>
+        <div className='flex justify-end items-center w-[15%] mx-auto space-x-3 mr-1'>
 
           {/* Account Icon */}
-          <IconButton onClick={() => navigate("/login")} className="lg:block hidden">
-            <AccountCircleIcon className="lg:text-[#1f1d1f] hover:md:text-[#C8A2C8] md:text-gray-700 text-gray-700" />
-          </IconButton>
+            <AccountCircleIcon onClick={() => navigate("/login")} className="lg:block hidden hover:md:text-[#C8A2C8] md:text-gray-700 lg:text-[#1f1d1f] text-gray-700" />
 
-          <span className="hidden lg:block text-black font-bold mr-1 ml-1">${totalPrice.toFixed(2)}</span>
+          <span className="hidden lg:block text-black font-bold">${totalPrice.toFixed(2)}</span>
           
-          <IconButton onClick={cartSection} className="lg:block hidden">
           <Badge 
+               onClick={cartSection}
               badgeContent={cartItemCount} 
               sx={{
                 '& .MuiBadge-badge': {
                   backgroundColor: 'black',  // Set badge background color to black
                   color: 'white',            // Set text color to white
-                  fontSize: '13px',          // Adjust font size
-                  width: '19px',             // Set width of the badge
-                  height: '19px',            // Set height of the badge
-                  minWidth: '19px',
+                  fontSize: '11px',          // Adjust font size
+                  width: '17px',             // Set width of the badge
+                  height: '17px',            // Set height of the badge
+                  minWidth: '17px',
                   borderRadius: '50%',       // Make it a circle
                   top: -3,                    // Adjust vertical position
                   right: -3,                  // Adjust horizontal position
                 }
               }}
+              className='lg:block hidden'
               overlap="circular"
             >       
-           <ShopTwoRoundedIcon className="lg:text-[#1f1d1f] hover:md:text-[#C8A2C8] md:text-gray-700 text-gray-700" sx={{width:"21px", height:"21px"}} />
+           <ShopTwoRoundedIcon className="lg:text-[#1f1d1f] hover:md:text-[#C8A2C8] md:text-gray-700 text-gray-700"/>
             </Badge>
-          </IconButton>
 
-          <IconButton className="lg:hidden" onClick={toggleDrawer(true)} sx={{ display: isMobile ? 'flex' : 'none' }}>
-            <MenuIcon className="text-gray-700 hover:text-[#C8A2C8]" />
-          </IconButton>
+            <MenuIcon onClick={toggleDrawer(true)} className="lg:hidden text-gray-700 hover:text-[#C8A2C8]"  sx={{ display: isMobile ? 'flex' : 'none' }} />
         </div>
       </Toolbar>
 

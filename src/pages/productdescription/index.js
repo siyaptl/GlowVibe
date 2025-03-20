@@ -123,23 +123,23 @@ function Description() {
                 <p className="text-gray-600 mt-4 font-light text-[16px] tracking-wider leading-[25px] mr-16">{product.description2}</p>
                 
                 <div className="flex items-center mt-6 space-x-4">
-                <div className="flex items-center border px-3 py-1">
-                <button
-                  className="pr-3 py-2 text-gray-500 flex items-center justify-center border-r"
-                  onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                >
-                  <Minus size={11} />
-                </button>
-                <span className="px-4 text-[13px] text-gray-500 flex items-center justify-center">
-                  {quantity}
-                </span>
-                <button
-                  className="pl-3 py-2 text-gray-500 flex items-center justify-center border-l"
-                  onClick={() => setQuantity((q) => q + 1)}
-                >
-                  <Plus size={13} />
-                </button>
-              </div>
+                  <div className="flex items-center border">
+                  <button
+                    className="w-[43px] text-gray-500 flex items-center justify-center border-r"
+                    onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                  >
+                    <Minus size={11} />
+                  </button>
+                  <span className="px-4 py-[9px] text-[13px] text-gray-500 flex items-center justify-center">
+                    {quantity}
+                  </span>
+                  <button
+                    className="w-[43px] text-gray-500 flex items-center justify-center border-l"
+                    onClick={() => setQuantity((q) => q + 1)}
+                  >
+                    <Plus size={13} />
+                  </button>
+                </div>
 
               <button onClick={()=>{if (window.confirm(`'${product.name}' will be added to the cart!`)) {addToCart()}}}
             className="bg-black text-white lg:px-5 w-[150px] md:px-4 py-[6.5px] hover:bg-[#c27e94] hover:text-black transition">
@@ -293,7 +293,7 @@ function Description() {
         </div>
         </div>
 
-        <label className="block font-medium text-[19px] text-slate-600 mt-3 mb-1 tracking-wider">Your rating * </label>
+        <label className="block font-medium text-[19px] text-slate-600 mt-3 mb-1 tracking-wider">Your review * </label>
         <textarea
           value={review}
           onChange={(e) => setReview(e.target.value)}
