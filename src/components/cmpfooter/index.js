@@ -48,7 +48,7 @@ function Footer() {
                 </div>
 
                 {/* Social Icons */}
-                <div className="flex justify-center md:justify-start lg:space-x-5 md:space-x-1 space-x-1 pb-5 lg:ml-5 lg:pt-[61px] md:pl-40 md:pt-[71px] pt-5">
+                <div className="w-[71%] md:w-[91%] lg:w-[71%] mx-auto flex justify-center md:justify-start lg:space-x-5 md:space-x-[1px] space-x-1 pb-5 lg:ml-5 md:pl-[43%] md:pt-[11px] lg:pt-[1px] pt-3">
                 <button onClick={() => window.open("https://facebook.com", "_blank")} className="text-gray-900 hover:text-pink-300 text-xl">
                     <i className="fab fa-facebook"></i>
                     </button>
