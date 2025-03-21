@@ -125,16 +125,16 @@ function Description() {
                 <div className="flex items-center mt-6 space-x-4">
                   <div className="flex items-center border">
                   <button
-                    className="w-[43px] text-gray-500 flex items-center justify-center border-r"
+                    className="w-[43px] mt-0 text-gray-500 flex items-center justify-center border-r"
                     onClick={() => setQuantity((q) => Math.max(1, q - 1))}
                   >
                     <Minus size={11} />
                   </button>
-                  <span className="px-4 py-[9px] text-[13px] text-gray-500 flex items-center justify-center">
+                  <span className="px-4 mt-0 text-[13px] text-gray-500 flex items-center justify-center">
                     {quantity}
                   </span>
                   <button
-                    className="w-[43px] text-gray-500 flex items-center justify-center border-l"
+                    className="w-[43px] mt-0 text-gray-500 flex items-center justify-center border-l"
                     onClick={() => setQuantity((q) => q + 1)}
                   >
                     <Plus size={13} />
@@ -142,7 +142,7 @@ function Description() {
                 </div>
 
               <button onClick={()=>{if (window.confirm(`'${product.name}' will be added to the cart!`)) {addToCart()}}}
-            className="bg-black text-white lg:px-5 w-[150px] md:px-4 py-[6.5px] hover:bg-[#c27e94] hover:text-black transition">
+            className="bg-black text-white lg:px-5 w-[150px] md:px-4 py-[6.5px] mt-0 hover:bg-[#c27e94] hover:text-black transition">
               ADD TO CART
                       </button>
                 </div>
