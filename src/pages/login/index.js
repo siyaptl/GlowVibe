@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import "./Login.css"; // Ensure this CSS file is linked
-import aboutimg from '../../assets/aboutimg.jpg';
+import loginpic from '../../assets/loginimg.png';
 
 const Login = () => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [isloginpage , setIsLoginPage] = useState(true)
-
+  const [isLoginPage, setIsLoginPage] = useState(true);
   
-let user = document.querySelector("#userid")
 let password = document.querySelector("#pwid")
 
 return (
@@ -21,39 +19,63 @@ return (
 
               {/* Transition container for smooth effect */}
             <div className={`transition-container`}>
-              <div className={`form-wrapper ${isloginpage ? "is-login" : "is-signup"}`}>
-              {/* login form */}  
-                { isloginpage ? (
-                  // login
-                  <div className={`form-box flex flex-row border border-red-100 ${isloginpage ? "" : "hidden"}`}>
-                    <div className=" ml-[5%] mt-[41px] p-5 pr-0 flex-row">
-                    <p className="text-white text-[41px]">Login</p>
-                    <hr className="w-[71px]  mb-5 mt-[3px]"></hr>
-                    <input className="usernamebox" type="text" id="userid" placeholder="Username" />
-                    <br></br>
-                    <input className="usernamebox passwordbox" type="password" id="pwid" placeholder="Password" />
-                    <br />
-                    <button className="login-btn">Log In</button>
-                    <button className="signup-btn" onClick={() => {setIsLoginPage(false); user.value = ""; password.value=""}}>Sign Up</button> 
-                    </div>
-                    {/* img */}
-                    <div className="ml-[3px] mt-[41px] p-5 pl-0">
-                      <img src={aboutimg} className="w-[431px] h-full object-cover" alt="LOGIN" />
-                    </div>
-                </div>
-                ):(
-                  // signup
-                  <div className=" ml-[71%] w-[51%] mt-[41px] p-5">
-                  <p className="text-white text-[41px]">SignUp</p>
-                  <hr className="w-[71px] mb-5 mt-[3px]"></hr>
-                  <input className="usernamebox" type="text"  id="userid" placeholder="Username" />
-                  <br></br>
-                  <input className="usernamebox" type="password"  id="pwid" placeholder="Password" />
-                  <br />
-                  <button className="login-btn"  onClick={() => {setIsLoginPage(true);user.value = ""; password.value=""}}>Log In</button>
-                <button className="signup-btn">Sign Up</button> 
-                </div>
-                )}
+              <div className={`form-wrapper ${isLoginPage ? "is-login" : "is-signup"}`}>
+              
+              {/* login form */} 
+              <div className={`textbox `}>
+      {/* Container Box */}
+      <div className="flex flex-row text-white xl:w-[700px] md:w-[700px] lg:w-[700px] w-[99%] h-[520px] justify-center">
+        
+        {/* Form Section */}
+        <div className="xl:w-1/2 md:w-1/2 lg:w-1/2 flex flex-col justify-center items-left p-6">
+          <p className="text-white text-[41px]">{isLoginPage ? "Login" : "Signup"}</p>
+          <hr className="w-[71px] mb-5 mt-[3px]"></hr>
+
+          {/* Input Fields */}
+          <input
+            className="usernamebox"
+            type="text"
+            placeholder="Username"
+          />
+          <input
+            className="usernamebox"
+            type="password"
+            placeholder="Password"
+            value={password}
+          />
+
+          {/* Extra Input for Signup */}
+          {!isLoginPage && (
+            <input
+            className="usernamebox"
+              type="password"
+              placeholder="Confirm Password"
+            />
+          )}
+
+          {/* Buttons */}
+          <div className="flex">
+            <button 
+            className="login-btn"
+            >
+              {isLoginPage ? "Log In" : "Sign Up"}
+            </button>
+            <button
+              className="signup-btn"
+              onClick={() => setIsLoginPage(!isLoginPage)}
+            >
+              {isLoginPage ? "Sign Up" : "Log In"}
+            </button>
+          </div>
+        </div>
+
+        {/* Image Section */}
+        <div className="w-1/2 hidden justify-center items-center p-4 xl:flex lg:flex md:flex">
+          <img src={loginpic} className="h-[301px] w-[323px]" alt="LOGIN" />
+        </div>
+      </div>
+    </div>
+
                 </div>
               </div>
             </div>
