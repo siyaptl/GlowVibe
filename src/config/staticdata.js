@@ -43,10 +43,6 @@ import mp71 from "../../src/assets/skincare/p11.jpg";
 import mp72 from "../../src/assets/skincare/p12.jpg";
 import mp73 from "../../src/assets/skincare/p13.jpg";
 import mp74 from "../../src/assets/skincare/p14.jpg";
-import mp81 from "../../src/assets/skincare/p21.jpg";
-import mp82 from "../../src/assets/skincare/p22.jpg";
-import mp83 from "../../src/assets/skincare/p23.jpg";
-import mp84 from "../../src/assets/skincare/p24.jpg";
 
 // home page products first row
 export const beautyProductsrow = [
