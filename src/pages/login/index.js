@@ -31,7 +31,9 @@ const Login = () => {
   const [showLoginForm, setShowLoginForm] = useState(false);
 
   const validateEmail = (email) =>
-    /^[a-zA-Z0-9._%+-]{1,64}@(gmail|yahoo|hotmail|outlook|icloud|protonmail|zoho)\.(com|in|co\.in|org|net)$/.test(email);
+    /^[a-zA-Z0-9._%+-]{1,64}@(gmail|yahoo|hotmail|outlook|icloud|protonmail|zoho)\.(com|in|co\.in|org|net)$/.test(
+      email
+    );
   const validatePassword = (password) =>
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
       password
@@ -114,12 +116,11 @@ const Login = () => {
 
       if (!credentials.confirmPassword.trim()) {
         newErrors.confirmPassword = "Required";
-    } else if (!credentials.password.trim()) {
+      } else if (!credentials.password.trim()) {
         newErrors.confirmPassword = "Please enter password first";
-    } else if (credentials.password !== credentials.confirmPassword) {
+      } else if (credentials.password !== credentials.confirmPassword) {
         newErrors.confirmPassword = "Passwords do not match";
-    }
-    
+      }
     }
     setErrors(newErrors);
     if (Object.values(newErrors).some((error) => error)) return;

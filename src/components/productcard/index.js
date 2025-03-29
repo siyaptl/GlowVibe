@@ -1,12 +1,11 @@
 import { Star } from "lucide-react";
-import LocalMallIcon from '@mui/icons-material/LocalMall';
-import { styled } from '@mui/material/styles';
-import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import LocalMallIcon from "@mui/icons-material/LocalMall";
+import { styled } from "@mui/material/styles";
+import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 function Productcard({ id, name, price, discountPrice, innerimage1 }) {
-  
   const BootstrapTooltip = styled(({ className, ...props }) => (
     <Tooltip {...props} arrow classes={{ popper: className }} />
   ))(({ theme }) => ({
@@ -23,7 +22,7 @@ function Productcard({ id, name, price, discountPrice, innerimage1 }) {
 
   const handleClick = () => {
     navigate(`/description/${id}`);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const addToCart = (event) => {
@@ -33,9 +32,9 @@ function Productcard({ id, name, price, discountPrice, innerimage1 }) {
     const existingItemIndex = cartItems.findIndex((item) => item.id === id);
 
     if (existingItemIndex !== -1) {
-        cartItems[existingItemIndex].quantity += quantity;
+      cartItems[existingItemIndex].quantity += quantity;
     } else {
-        cartItems.push({ id, name, price, discountPrice, innerimage1, quantity });
+      cartItems.push({ id, name, price, discountPrice, innerimage1, quantity });
     }
 
     localStorage.setItem("cart", JSON.stringify(cartItems));
@@ -53,37 +52,45 @@ function Productcard({ id, name, price, discountPrice, innerimage1 }) {
     parentElement.style.transition = "opacity 0.5s ease-in-out";
 
     setTimeout(() => {
-        parentElement.style.opacity = "0"; // Fade out effect
-        setTimeout(() => {
-            parentElement.style.visibility = "hidden"; // Hide the element
-            parentElement.style.backgroundColor = ""; // Reset background
-        }, 300);
+      parentElement.style.opacity = "0"; // Fade out effect
+      setTimeout(() => {
+        parentElement.style.visibility = "hidden"; // Hide the element
+        parentElement.style.backgroundColor = ""; // Reset background
+      }, 300);
     }, 1500);
-};
+  };
 
   return (
     <div className="lg:mb-0 mb-2 bg-white relative group" onClick={handleClick}>
-            <div id="parent" className='fixed top-0 left-0  w-[76%] ml-[12%] py-2 text-center shadow-md z-50 invisible'></div>
+      <div
+        id="parent"
+        className="fixed top-0 left-0  w-[76%] ml-[12%] py-2 text-center shadow-md z-50 invisible"
+      ></div>
 
       {/* Product Image Placeholder */}
       <div className="hover:shadow-xl transition-all duration-300 ease-in-out hover:scale-100 min-w-[111px] w-full bg-pink-100 rounded-lg">
-        <img src={innerimage1} alt={name}/>
+        <img src={innerimage1} alt={name} />
         <span className="absolute opacity-0 lg:flex md:hidden group-hover:opacity-100 top-3 right-3 bg-[#fdfdfb] h-9 w-9 mt-0 hidden items-center justify-center rounded-full shadow-md ">
-        <BootstrapTooltip title={<span style={{ fontSize: '13px', padding: '11px' }}>Add to cart</span>} placement="left">
-  <span
-    onClick={(event) => {
-      event.stopPropagation(); // Prevent click from reaching the parent
-          if (window.confirm(`'${name}' will be added to the cart!`)) {
-            addToCart(event);
-          }
-        }}
-        className="cursor-pointer"
-      >
-        <LocalMallIcon className="text-slate-700" fontSize="small" />
-      </span>
-    </BootstrapTooltip>
-
-
+          <BootstrapTooltip
+            title={
+              <span style={{ fontSize: "13px", padding: "11px" }}>
+                Add to cart
+              </span>
+            }
+            placement="left"
+          >
+            <span
+              onClick={(event) => {
+                event.stopPropagation(); // Prevent click from reaching the parent
+                if (window.confirm(`'${name}' will be added to the cart!`)) {
+                  addToCart(event);
+                }
+              }}
+              className="cursor-pointer"
+            >
+              <LocalMallIcon className="text-slate-700" fontSize="small" />
+            </span>
+          </BootstrapTooltip>
         </span>
       </div>
 

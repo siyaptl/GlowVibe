@@ -17,7 +17,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import ShopTwoRoundedIcon from "@mui/icons-material/ShopTwoRounded";
 import { ShoppingCart } from "lucide-react";
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
 
 function Header() {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -260,7 +260,7 @@ function Header() {
                   <AccountBoxIcon className="text-gray-700 w-[71px] h-[51px]" />
                 </div>
                 {/* User Info */}
-                {/* <div className="flex flex-col ml-3 flex-grow">
+            {/* <div className="flex flex-col ml-3 flex-grow">
                   <span className="font-semibold text-sm">
                     {user?.firstname} {user?.lastname}
                   </span>
