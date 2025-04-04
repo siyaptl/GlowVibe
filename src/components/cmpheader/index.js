@@ -17,7 +17,8 @@ import { Link, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import ShopTwoRoundedIcon from "@mui/icons-material/ShopTwoRounded";
 import { ShoppingCart } from "lucide-react";
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import ClearIcon from "@mui/icons-material/Clear";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 function Header() {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -30,16 +31,11 @@ function Header() {
   const [totalPrice, setTotalCartPrice] = useState(0);
   const [cartItems, setCartItems] = useState([]);
   const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false); //menu
 
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-  if (currentUser) {
-    console.log("Name:", currentUser.firstname + " " + currentUser.lastname);
-    console.log("Email:", currentUser.username);
-  } else {
-    console.log("No user is currently logged in.");
-  }
 
-  const user = JSON.parse(localStorage.getItem("currentUser"));
+  const users = JSON.parse(localStorage.getItem("users"));
 
   useEffect(() => {
     const handleCartUpdate = () => {
@@ -212,7 +208,7 @@ function Header() {
                       VIEW CART
                     </button>
 
-                    <button className="w-[100%] bg-gray-700 text-white py-3 px-5 font-medium hover:bg-gray-800 transition-colors">
+                    <button className="w-[100%] bg-gray-700 text-white py-3 px-5 font-medium hover:bg-gray-800 transition-colors" onClick={()=>navigate('/checkout')}>
                       CHECKOUT
                     </button>
                   </>
@@ -249,27 +245,125 @@ function Header() {
         <div className="flex justify-end items-center w-[15%] mx-auto space-x-3 mr-1">
           {/* Account Icon */}
           <div className="relative group inline-block cursor-pointer">
-            <AccountCircleIcon
-              onClick={() => navigate("/login")}
-              className="lg:block hidden hover:md:text-[#C8A2C8] md:text-gray-700 lg:text-[#1f1d1f] text-gray-700"
-            />
+          {currentUser?.profilePic ? (
+  <img
+    src={currentUser.profilePic}
+    alt="User Profile"
+    className="w-7 h-7 rounded-full cursor-pointer"
+    onClick={() => setOpen(true)}
+  />
+) : (
+  <AccountCircleIcon
+    onClick={() => setOpen(true)}
+    className="lg:block hidden hover:md:text-[#C8A2C8] md:text-gray-700 lg:text-[#1f1d1f] text-gray-700"
+  />
+)}
+
 
             {/* Tooltip */}
-            {/* <div className="absolute flex space-x-3 left-1/2 -translate-x-1/2 mt-[5px] bg-pink-100 rounded-md text-gray-900 py-5 px-5 z-10 shadow-lg">
-                <div>
-                  <AccountBoxIcon className="text-gray-700 w-[71px] h-[51px]" />
+            {open && (
+              <div className="absolute left-1/2 xl:-translate-x-[77%] md:-translate-x-[81%] lg:-translate-x-[61%] -translate-x-[57%] mt-[5px] rounded-md bg-gray-50 text-gray-900 py-5 px-3 z-10 shadow-lg w-fit">
+                <div className="mb-1 text-right py-1 px-3">
+                  {currentUser ? (
+                    <ClearIcon
+                      className="text-gray-500 hover:text-gray-700"
+                      sx={{ width: "21px", height: "21px" }}
+                      onClick={(()=>{setOpen(false); setIsOpen(false)})}
+                    />
+                  ) : (
+                    <button
+                      className="px-3 py-1 border bg-gray-500 text-white rounded-sm tracking-wide hover:bg-gray-300 hover:text-gray-900"
+                      onClick={() => navigate("/login")}
+                    >
+                      Login
+                    </button>
+                  )}
                 </div>
-                {/* User Info */}
-            {/* <div className="flex flex-col ml-3 flex-grow">
-                  <span className="font-semibold text-sm">
-                    {user?.firstname} {user?.lastname}
-                  </span>
-                  <span className="text-xs text-gray-500">
-                    {user?.username}
-                  </span>
-                  <button onClick={() => navigate("/login")}>Login</button>
-                </div>
-              // </div> */}
+                {
+                  <div className="flex flex-col items-center bg-gray-300 bg-opacity-55 w-full rounded-sm text-center py-11 pt-7">
+                    <div className="relative w-full text-right pr-3">
+                      {currentUser ? (
+                        <MoreVertIcon
+                          className="text-gray-700 hover:text-gray-900 hover:bg-gray-300 rounded-full p-[1px]"
+                          onClick={() => setIsOpen(!isOpen)}
+                        />
+                      ) : (
+                        ""
+                      )}
+                      {isOpen && (
+                        <div className="absolute top-5 -right-3 mt-2 bg-gray-50 bg-opacity-85 border rounded-lg shadow-lg w-fit px-1">
+                          <ul className="py-3 pr-3 text-left tracking-widest text-gray-900 hover:text-gray-700 text-sm">
+                            <li
+                              className="px-3 py-1 hover:bg-gray-100 cursor-pointer"
+                              onClick={() => navigate("/profile")}
+                            >
+                              Profile
+                            </li>
+                            <li
+                              className="px-3 py-1 hover:bg-gray-100 cursor-pointer"
+                              onClick={() => navigate("/login")}
+                            >
+                              Login
+                            </li>
+                            <li
+                              className="px-3 py-1 hover:bg-gray-100 cursor-pointer"
+                              onClick={() => {
+                                localStorage.removeItem("currentUser");
+                                setIsOpen(false)
+                              }}
+                            >
+                              Logout
+                            </li>
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                    <div className="xl:px-24 md:px-24 lg:px-24 px-11">
+                      <div>
+                        <div className="flex flex-row w-fit mx-auto">
+                        {currentUser?.profilePic ? (
+  <img
+    src={currentUser.profilePic}
+    alt="User Profile"
+    className="w-24 h-24 rounded-full cursor-pointer mb-3"
+    onClick={() => setOpen(true)}
+  />
+) : (
+  <AccountCircleIcon
+    onClick={() => setOpen(true)}
+    className="lg:block hidden hover:md:text-[#C8A2C8] md:text-gray-700 lg:text-[#1f1d1f] text-gray-700"
+  />
+)}
+
+                        </div>
+                      </div>
+                      {/* User Info */}
+                      {currentUser?.username ? (
+                        (() => {
+                          const matchedUser = users.find(
+                            (user) => user.username === currentUser.username
+                          );
+                          return matchedUser ? (
+                            <div className="flex flex-col flex-grow w-fit px-3">
+                              <span className="text-[19px] pl-0 text-left mx-auto tracking-wider w-fit truncate">
+                                {matchedUser.firstname} {matchedUser.lastname}
+                              </span>
+                              <span className="text-[11px] pl-0 text-left mx-auto tracking-widest text-gray-700">
+                                {matchedUser.username}
+                              </span>
+                            </div>
+                          ) : (
+                            "User not found"
+                          );
+                        })()
+                      ) : (
+                        <div className="truncate">No user logged in</div>
+                      )}
+                    </div>
+                  </div>
+                }
+              </div>
+            )}
           </div>
 
           <span className="hidden lg:block text-black font-bold">

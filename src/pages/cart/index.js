@@ -247,7 +247,7 @@ function Cart() {
               <div className="flex justify-center">
                 <button
                   className="w-[83%] mx-auto my-5 rounded-sm bg-gray-700 text-white py-5 text-center text-[17px] tracking-wider uppercase hover:bg-[#c27e94] hover:text-black transition-colors"
-                  onClick={() => alert("Proceeding to checkout!")} // Replace with navigate("/checkout") if using React Router
+                  onClick={() =>{  navigate('/checkout')}} // Replace with navigate("/checkout") if using React Router
                 >
                   PROCEED TO CHECKOUT
                 </button>

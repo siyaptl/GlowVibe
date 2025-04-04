@@ -14,6 +14,8 @@ import Faq from './pages/faq';
 import Description from './pages/productdescription'; 
 import Login from './pages/login';
 import Cart from './pages/cart';
+import Profile from './pages/profile';
+import Checkout from './pages/checkout';
 
 export default function App() {
   return (
@@ -30,6 +32,8 @@ export default function App() {
         <Route path="/description/:id" element={<Description />} />
         <Route path="/login" element={<Login />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Routes>
     </Router>
   )
