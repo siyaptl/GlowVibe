@@ -81,73 +81,91 @@ const Checkout = () => {
       });
     }
   };
+  
+  const fetchUserAddress = () => {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const matchedUser = users.find(user => user.username === currentUser.username);
+    if (matchedUser?.address) {
+      setAddress(matchedUser.address);
+    }
+  };
+  
 
   const handleAddress = () => {
     const requiredFields = ["street1", "city", "state", "zip"];
     const newInvalidFields = {};
-
+  
     requiredFields.forEach((field) => {
       if (!address[field].trim()) {
         newInvalidFields[field] = true;
       }
     });
-
+  
     if (Object.keys(newInvalidFields).length > 0) {
       setInvalidFields(newInvalidFields);
       alert("Please fill in all required address fields.");
       return;
     }
-
+  
     setInvalidFields({});
-
+  
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
     const users = JSON.parse(localStorage.getItem("users")) || [];
-
-    const matchedUser = users.find(
+  
+    const matchedUserIndex = users.findIndex(
       (user) => user.username === currentUser.username
     );
-
-    if (matchedUser) {
-      const isAddressChanged =
-        matchedUser.address.street1 !== address.street1 ||
-        matchedUser.address.street2 !== address.street2 ||
-        matchedUser.address.city !== address.city ||
-        matchedUser.address.state !== address.state ||
-        matchedUser.address.zip !== address.zip;
-
-      if (isAddressChanged) {
-        const updatedUsers = users.map((user) =>
-          user.username === currentUser.username ? { ...user, address } : user
-        );
-
-        localStorage.setItem("users", JSON.stringify(updatedUsers));
-      }
+  
+    if (matchedUserIndex !== -1) {
+      users[matchedUserIndex].address = address;
+      localStorage.setItem("users", JSON.stringify(users));
+      fetchUserAddress(); // ✅ update UI with latest
     }
   };
+  
 
   const handlePlaceOrder = () => {
     const requiredFields = ["street1", "city", "state", "zip"];
     const newInvalidFields = {};
-
+  
     requiredFields.forEach((field) => {
       if (!address[field].trim()) {
         newInvalidFields[field] = true;
       }
     });
-
+  
     if (Object.keys(newInvalidFields).length > 0) {
       setInvalidFields(newInvalidFields);
       alert("Please fill in all required address fields.");
       return;
     }
-
+  
+    // Save placed order to 'orders' in localStorage
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const existingOrders = JSON.parse(localStorage.getItem("orders")) || [];
+  
+    const newOrder = {
+      id: Date.now(),
+      username: currentUser?.username,
+      items: cartItems,
+      total: totalPrice,
+      address,
+      placedAt: new Date().toLocaleString(),
+    };
+  
+    const updatedOrders = [...existingOrders, newOrder];
+    localStorage.setItem("orders", JSON.stringify(updatedOrders));
+  
+    // Clear cart
     localStorage.removeItem("cart");
     setOrderPlaced(true);
-
+  
     setTimeout(() => {
-      navigate("/");
+      navigate("/myorders");
     }, 3000);
   };
+  
 
   const isAnyAddressFieldEmpty = () => {
     return (

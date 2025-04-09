@@ -16,6 +16,7 @@ import Login from './pages/login';
 import Cart from './pages/cart';
 import Profile from './pages/profile';
 import Checkout from './pages/checkout';
+import MyOrders from './pages/myorder';
 
 export default function App() {
   return (
@@ -33,7 +34,8 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/checkout" element={<Checkout />} /> 
+        <Route path="/myorders" element={<MyOrders />} />
       </Routes>
     </Router>
   )

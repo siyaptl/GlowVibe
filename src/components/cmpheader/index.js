@@ -101,6 +101,20 @@ function Header() {
     setCartVisible(true); // This correctly updates the state
   }
 
+  const [hasOrders, setHasOrders] = useState(false);
+
+  useEffect(() => {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const allOrders = JSON.parse(localStorage.getItem("orders")) || [];
+
+    const userOrders = allOrders.filter(
+      (order) => order.username === currentUser?.username
+    );
+
+    const anyItems = userOrders.some((order) => order.items.length > 0);
+    setHasOrders(anyItems);
+  }, []);
+
   return (
     <>
       {cartVisible && (
@@ -177,15 +191,29 @@ function Header() {
 
               <div className="border-gray-200 p-4 w-[100%] px-5 absolute bottom-0">
                 {cartItems.length === 0 ? (
-                  <button
-                    onClick={() => {
-                      setCartVisible(false);
-                      navigate("/shopall"); // Navigate to shopall page
-                    }}
-                    className="w-[100%] bg-black text-white border-t-0 py-3 px-7 my-3 font-medium hover:bg-[#c27e94] hover:text-black transition-colors"
-                  >
-                    CONTINUE TO SHOPPING
-                  </button>
+                  <>
+                    <button
+                      onClick={() => {
+                        setCartVisible(false);
+                        navigate("/shopall"); // Navigate to shopall page
+                      }}
+                      className="w-full bg-gray-700 mt-2 text-white py-3 px-5 font-medium hover:bg-gray-800 transition-colors"
+                    >
+                      CONTINUE TO SHOPPING
+                    </button>
+                    {hasOrders && (
+                      <button
+                        onClick={() => {
+                          setCartVisible(false);
+                          navigate("/myorders");
+                          window.scrollTo(0, 0);
+                        }}
+                        className="w-full bg-gray-700 mt-2 text-white py-3 px-5 font-medium hover:bg-gray-800 transition-colors"
+                      >
+                        MY ORDERS
+                      </button>
+                    )}
+                  </>
                 ) : (
                   <>
                     <div className="flex justify-between items-center mb-4 border-t pt-5">
@@ -208,9 +236,25 @@ function Header() {
                       VIEW CART
                     </button>
 
-                    <button className="w-[100%] bg-gray-700 text-white py-3 px-5 font-medium hover:bg-gray-800 transition-colors" onClick={()=>navigate('/checkout')}>
+                    <button
+                      className="w-[100%] bg-gray-700 text-white py-3 px-5 font-medium hover:bg-gray-800 transition-colors"
+                      onClick={() => navigate("/checkout")}
+                    >
                       CHECKOUT
                     </button>
+
+                    {hasOrders && (
+                      <button
+                        onClick={() => {
+                          setCartVisible(false);
+                          navigate("/myorders");
+                          window.scrollTo(0, 0);
+                        }}
+                        className="w-full bg-gray-700 mt-2 text-white py-3 px-5 font-medium hover:bg-gray-800 transition-colors"
+                      >
+                        MY ORDERS
+                      </button>
+                    )}
                   </>
                 )}
               </div>
@@ -245,20 +289,19 @@ function Header() {
         <div className="flex justify-end items-center w-[15%] mx-auto space-x-3 mr-1">
           {/* Account Icon */}
           <div className="relative group inline-block cursor-pointer">
-          {currentUser?.profilePic ? (
-  <img
-    src={currentUser.profilePic}
-    alt="User Profile"
-    className="w-7 h-7 rounded-full cursor-pointer"
-    onClick={() => setOpen(true)}
-  />
-) : (
-  <AccountCircleIcon
-    onClick={() => setOpen(true)}
-    className="lg:block hidden hover:md:text-[#C8A2C8] md:text-gray-700 lg:text-[#1f1d1f] text-gray-700"
-  />
-)}
-
+            {currentUser?.profilePic ? (
+              <img
+                src={currentUser.profilePic}
+                alt="User Profile"
+                className="w-7 h-7 rounded-full cursor-pointer"
+                onClick={() => setOpen(true)}
+              />
+            ) : (
+              <AccountCircleIcon
+                onClick={() => setOpen(true)}
+                className="lg:block hidden hover:md:text-[#C8A2C8] md:text-gray-700 lg:text-[#1f1d1f] text-gray-700"
+              />
+            )}
 
             {/* Tooltip */}
             {open && (
@@ -268,7 +311,10 @@ function Header() {
                     <ClearIcon
                       className="text-gray-500 hover:text-gray-700"
                       sx={{ width: "21px", height: "21px" }}
-                      onClick={(()=>{setOpen(false); setIsOpen(false)})}
+                      onClick={() => {
+                        setOpen(false);
+                        setIsOpen(false);
+                      }}
                     />
                   ) : (
                     <button
@@ -309,7 +355,7 @@ function Header() {
                               className="px-3 py-1 hover:bg-gray-100 cursor-pointer"
                               onClick={() => {
                                 localStorage.removeItem("currentUser");
-                                setIsOpen(false)
+                                setIsOpen(false);
                               }}
                             >
                               Logout
@@ -321,20 +367,19 @@ function Header() {
                     <div className="xl:px-24 md:px-24 lg:px-24 px-11">
                       <div>
                         <div className="flex flex-row w-fit mx-auto">
-                        {currentUser?.profilePic ? (
-  <img
-    src={currentUser.profilePic}
-    alt="User Profile"
-    className="w-24 h-24 rounded-full cursor-pointer mb-3"
-    onClick={() => setOpen(true)}
-  />
-) : (
-  <AccountCircleIcon
-    onClick={() => setOpen(true)}
-    className="lg:block hidden hover:md:text-[#C8A2C8] md:text-gray-700 lg:text-[#1f1d1f] text-gray-700"
-  />
-)}
-
+                          {currentUser?.profilePic ? (
+                            <img
+                              src={currentUser.profilePic}
+                              alt="User Profile"
+                              className="w-24 h-24 rounded-full cursor-pointer mb-3"
+                              onClick={() => setOpen(true)}
+                            />
+                          ) : (
+                            <AccountCircleIcon
+                              onClick={() => setOpen(true)}
+                              className="lg:block hidden hover:md:text-[#C8A2C8] md:text-gray-700 lg:text-[#1f1d1f] text-gray-700"
+                            />
+                          )}
                         </div>
                       </div>
                       {/* User Info */}
