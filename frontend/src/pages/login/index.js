@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { login } from "../../Redux/authSlice";
 import loginpic from "../../assets/imm.jpeg";
 import { useNavigate } from "react-router-dom";
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
+import axios from "axios";
+
 
 const Login = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isLoginPage, setIsLoginPage] = useState(true);
   const [credentials, setCredentials] = useState({
@@ -65,7 +64,7 @@ const Login = () => {
     setCredentials({ ...credentials, [name]: value });
   };
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     let newErrors = {
       firstname: "",
       lastname: "",
@@ -75,20 +74,20 @@ const Login = () => {
       confirmPassword: "",
     };
     setLoginError("");
-
+  
     // validations
     if (!credentials.username.trim()) {
       newErrors.username = "Required";
     } else if (!validateEmail(credentials.username)) {
       newErrors.username = "Invalid email";
     }
-
+  
     if (!credentials.password.trim()) {
       newErrors.password = "Required";
     } else if (!isLoginPage && !validatePassword(credentials.password)) {
       newErrors.password = "Password must be complex";
     }
-
+  
     if (!isLoginPage) {
       if (!credentials.firstname.trim()) {
         newErrors.firstname = "Required";
@@ -98,7 +97,7 @@ const Login = () => {
       ) {
         newErrors.firstname = "At least 2 characters";
       }
-
+  
       if (!credentials.lastname.trim()) {
         newErrors.lastname = "Required";
       } else if (
@@ -107,13 +106,13 @@ const Login = () => {
       ) {
         newErrors.lastname = "At least 2 characters";
       }
-
+  
       if (!credentials.contact.trim()) {
         newErrors.contact = "Required";
       } else if (!/^\d{10}$/.test(credentials.contact)) {
         newErrors.contact = "Must be a valid 10-digit number";
       }
-
+  
       if (!credentials.confirmPassword.trim()) {
         newErrors.confirmPassword = "Required";
       } else if (!credentials.password.trim()) {
@@ -122,59 +121,56 @@ const Login = () => {
         newErrors.confirmPassword = "Passwords do not match";
       }
     }
+  
     setErrors(newErrors);
     if (Object.values(newErrors).some((error) => error)) return;
-
-    let users = JSON.parse(localStorage.getItem("users")) || [];
-
-    if (isLoginPage) {
-      const existingUser = users.find(
-        (user) =>
-          user.username === credentials.username &&
-          user.password === credentials.password
-      );
-
-      if (existingUser) {
-        dispatch(
-          login({
-            username: credentials.username,
-            password: credentials.password,
-          })
-        );
-        alert("Login successful!");
-        navigate("/");
-      } else {
-        setLoginError("Invalid email or password");
-      }
+  
+    // POST signup data if on Signup page
+if (!isLoginPage) {
+  try {
+    const response = await axios.post("http://localhost:5000/api/signup", credentials);
+    console.log("Signup Success:", response.data);
+    alert("Signup Successful!");
+    setIsLoginPage(true); // Switch to login after signup
+  } catch (error) {
+    console.error("Signup Error:", error.response?.data || error.message);
+    
+    // ✅ Check for "User already exists!" error from backend
+    if (error.response?.data?.error === "User already exists!") {
+      alert("This user is already registered.");
     } else {
-      const isUserExists = users.some(
-        (user) => user.username === credentials.username
-      );
-
-      if (isUserExists) {
-        alert("An account with this email already exists.");
-      } else {
-        users.push({
-          firstname: credentials.firstname,
-          lastname: credentials.lastname,
-          username: credentials.username,
-          contact: credentials.contact,
-          password: credentials.password,
-        });
-        localStorage.setItem("users", JSON.stringify(users));
-        alert("Signup successful!");
-        setIsLoginPage(true);
-        setCredentials({
-          firstname: "",
-          lastname: "",
-          username: "",
-          password: "",
-          contact: "",
-          confirmPassword: "",
-        });
-      }
+      alert("Signup failed. Try again!");
     }
+  }
+}
+if (isLoginPage) {
+  try {
+    const response = await axios.post("http://localhost:5000/api/login", credentials);
+    console.log("Login Success:", response.data);
+    alert("Login Successful!");
+    navigate('/')
+    
+    // You can redirect or update state here on successful login
+  } catch (error) {
+    console.error("Login Error:", error.response?.data || error.message);
+    
+    // ✅ Handle specific error messages from backend
+    const errorMsg = error.response?.data?.error;
+    if (errorMsg === "User not found!") {
+      alert("No user found with this email.");
+    } else if (errorMsg === "Invalid password!") {
+      alert("Incorrect password.");
+    } else {
+      alert("Login failed. Please try again.");
+    }
+  }
+}
+
+
   };
+  
+
+ 
 
   return (
     <div
